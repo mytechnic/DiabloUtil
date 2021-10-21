@@ -43,7 +43,7 @@
             "options": { "pipeCharacterBehavior" : "handle", "newlineHandling": "reversed" }
         },
         "padding": [ 20, 12, 20, 12 ],
-        "inGameTargetPadding": [ 7, 1, 7, 1 ],		//아이템 툴팁 패딩 디폴트 7171
+        "inGameTargetPadding": [ 0, 0, 0, 0 ],		//아이템 툴팁 패딩 디폴트 7171
         "drawBorder": false,
         "centeredOnAnchor": true,
         "hp": 0,

@@ -280,13 +280,13 @@
             "options": { "pipeCharacterBehavior": "handle", "newlineHandling": "reversed" },
         },
         "padding": [ 20, 12, 20, 12 ],
-        "inGameTargetPadding": [ 7, 1, 7, 1 ],		//아이템툴팁 패딩 (디폴트 7171)
+        "inGameTargetPadding": [ 0, 0, 0, 0 ],		//아이템툴팁 패딩 (디폴트 7171)
         "drawBorder": false,
         "centeredOnAnchor": true,
         "hp": 0,
-        "backgroundColor": [ 0, 0, 0, 0.75 ],
+        "backgroundColor": [ 0, 0, 0, 1.0 ],
         // This color is used for in-game tooltip label backgrounds
-        "inGameBackgroundColor": [ 0, 0, 0, 0.6 ],
+        "inGameBackgroundColor": [ 0, 0, 0, 1.0 ],
         // This color is used for the show items selected label background
         "inGameShowItemsSelectedBackgroundColor": [ 0, 0.25, 0.5, 1.0 ],
         "substringColor": "$FontColorLightGray",
