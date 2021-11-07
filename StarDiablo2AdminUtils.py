@@ -601,6 +601,7 @@ class MainApp(QWidget):
                 QMessageBox.about(self, '방화벽 설정', '방화벽 대역 설정에 실패 하였습니다.')
         else:
             QMessageBox.about(self, '방화벽 설정', '설정 된 방화벽이 제거 되었습니다.')
+        self.openFirewall()
 
     def findIpClicked(self):
         self.currentSaveConfig()
@@ -738,6 +739,12 @@ class MainApp(QWidget):
             resMsg = 'SET ... FAIL - ' + name
             self.debugPrint(resMsg)
             return False
+
+    def openFirewall(self):
+        try:
+            os.system('C:\Windows\System32\WF.msc')
+        except Exception as err:
+            print(err)
 
     def openMainForm(self, layout):
         self.setLayout(layout)
