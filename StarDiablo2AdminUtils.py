@@ -3,6 +3,7 @@ import os
 import random
 import subprocess
 import sys
+import threading
 import time
 import winsound
 
@@ -740,9 +741,13 @@ class MainApp(QWidget):
             self.debugPrint(resMsg)
             return False
 
+    def openFirewallAsync(self):
+        x = threading.Thread(target=self.openFirewall, args=())
+        x.start()
+
     def openFirewall(self):
         try:
-            os.system('C:\Windows\System32\WF.msc')
+            os.system('start C:\Windows\System32\WF.msc')
         except Exception as err:
             print(err)
 
