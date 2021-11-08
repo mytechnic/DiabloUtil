@@ -646,6 +646,7 @@ class MainApp(QWidget):
     def paintFindIpResult(self, serverIpList, gameIpList, findIp, isFind):
         serverTitle = self.getServerTitle(serverIpList)
         self.serverTitle.setText(serverTitle)
+        self.debugPrint('서버 IP - ' + ', '.join(serverIpList))
 
         if len(gameIpList) > 0:
             ip = ', '.join(gameIpList)
@@ -668,10 +669,10 @@ class MainApp(QWidget):
             return '아시아(79)'
         elif '117.52.35.179' in serverIpList:
             return '아시아(179)'
-        elif '204.79.197.222' in serverIpList:
-            return '아메리카(222)'
+        elif '137.221.106.88' in serverIpList:
+            return '아메리카'
         elif '37.244.28.80' in serverIpList:
-            return '유럽(80)'
+            return '유럽'
         else:
             return 'None'
 
@@ -713,10 +714,7 @@ class MainApp(QWidget):
                     isD2Ip = False
             else:
                 if isD2Ip:
-                    if (text.find(':443') != -1
-                            and text.find('ESTABLISHED') != -1
-                            and text.find('24.105.29.76') == -1
-                            and text.find('34.117.122.6') == -1):
+                    if (text.find(':443') != -1 and text.find('ESTABLISHED') != -1):
                         z = text.split()
                         z = z[2].split(':')
                         ip = z[0]
@@ -728,6 +726,15 @@ class MainApp(QWidget):
     def getD2GameIpList(self, serverIpList):
         d2IpList = []
         for ip in serverIpList:
+            if (ip == '24.105.29.76'
+                    # 유럽
+                    or ip == '37.244.28.80'
+                    or ip == '104.76.67.204'
+                    # 아메리카
+                    or ip == '34.117.122.6'
+                    or ip == '137.221.106.88'):
+                continue
+
             if (ip.startswith('34.')
                     or ip.startswith('35.')
                     or ip.startswith('104.')

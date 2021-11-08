@@ -1,7 +1,7 @@
 cycleSec: 90
 delay: 20
-gameNumber: 4
+gameNumber: 5
 password: '1'
-program: C:\Program Files (x86)\Diablo II Resurrected\D2R.e1xe
+program: C:\Program Files (x86)\Diablo II Resurrected\D2R.exe
 room: SBW
-targetIp: 158.115.204.52
+targetIp: 34.93.251.236
