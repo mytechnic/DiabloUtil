@@ -57,7 +57,7 @@ class MainApp(QWidget):
 
     def __init__(self):
         super().__init__()
-        if os.path.isfile('config.yaml'):
+        if os.path.isfile('StarDiablo2AdminUtilsConfig.yaml'):
             self.loadConfig()
         else:
             self.saveConfig()
@@ -93,11 +93,11 @@ class MainApp(QWidget):
         self.writeDebugLogFile(msg)
 
     def loadConfig(self):
-        with open('config.yaml') as f:
+        with open('StarDiablo2AdminUtilsConfig.yaml') as f:
             self.config = yaml.load(f, Loader=yaml.FullLoader)
 
     def saveConfig(self):
-        with open('config.yaml', 'w') as f:
+        with open('StarDiablo2AdminUtilsConfig.yaml', 'w') as f:
             yaml.dump(self.config, f)
 
     def currentSaveConfig(self):
