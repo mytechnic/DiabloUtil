@@ -727,7 +727,6 @@ class MainApp(QWidget):
         d2IpList = []
         for ip in serverIpList:
             if (ip == '24.105.29.76'
-                    or ip == '34.117.122.6'
                     # 유럽
                     or ip == '37.244.28.80'
                     or ip == '104.76.67.204'
