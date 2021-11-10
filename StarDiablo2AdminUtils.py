@@ -795,19 +795,19 @@ class MainApp(QWidget):
             ignoreIpValue = self.ip2int('34.117.122.6')
             targetIpValue = self.ip2int(targetIp)
             if o1 == 34:
-                if targetIpValue < ignoreIpValue:
-                    ipBlockList.append(str(o1) + '.1.1.1-' + self.int2ip(targetIpValue - 1))
-                    if targetIpValue != ignoreIpValue - 1:
-                        ipBlockList.append(self.int2ip(targetIpValue + 1) + '-34.117.122.5')
-                    ipBlockList.append('34.117.122.7-34.255.255.255')
-                elif targetIpValue > ignoreIpValue:
-                    ipBlockList.append('34.117.1.1-34.117.122.5')
-                    if targetIpValue != ignoreIpValue + 1:
-                        ipBlockList.append('34.117.122.7-' + self.int2ip(targetIpValue - 1))
-                    ipBlockList.append(self.int2ip(targetIpValue + 1) + '-34.255.255.255')
+                if o2 > 117:
+                    ipBlockList.append('34.1.1.1-' + '34.116.255.255')
+                    ipBlockList.append('34.117.1.1-' + '34.117.122.5')
+                    ipBlockList.append('34.117.122.7-' + '34.' + str(o2 - 1) + '.255.255')
+                    ipBlockList.append('34.' + str(o2 + 1) + '.122.7-' + '34.255.255.255')
+                elif o2 < 117:
+                    ipBlockList.append('34.1.1.1-' + '34.116.255.255')
+                    ipBlockList.append('34.117.1.1-' + '34.117.122.5')
+                    ipBlockList.append('34.117.122.7-' + '34.' + str(o2 - 1) + '.255.255')
+                    ipBlockList.append('34.' + str(o2 + 1) + '.122.7-' + '34.255.255.255')
                 else:
-                    ipBlockList.append('34.117.1.1-34.117.122.5')
-                    ipBlockList.append('34.117.122.7-34.255.255.255')
+                    ipBlockList.append('34.1.1.1-' + '34.116.255.255')
+                    ipBlockList.append('34.118.1.1-34.255.255.255')
             else:
                 ipBlockList.append(str(o1) + '.1.1.1-' + str(o1) + '.' + str(o2 - 1) + '.255.255')
                 ipBlockList.append(str(o1) + '.' + str(o2 + 1) + '.1.1-' + str(o1) + '.255.255.255')
