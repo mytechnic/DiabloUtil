@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import winsound
 
 import psutil
 
@@ -75,21 +74,28 @@ def isFindGameIp(targetIp, gameIpList):
     if not targetIp:
         return False
 
-    return targetIp.strip() in gameIpList
+    ips = targetIp.split(',')
+    for ip in ips:
+        if ip.strip() in gameIpList:
+            return True
+
+    return False
 
 
-def getGameFindResult(targetIp, gameIpList):
+def getGameFindResult(targetIp, gameIpList, isStayMode=False):
     if len(gameIpList) == 0:
-        return '게임 아이피를 찾을 수 없습니다.'
+        return 'IP를 찾을 수 없습니다.'
 
     ips = ', '.join(gameIpList)
+
+    if isStayMode:
+        return ips + '(지킴이 모드)'
 
     if not targetIp:
         return ips
 
     isFind = isFindGameIp(targetIp, gameIpList)
     if isFind:
-        winsound.PlaySound("SystemHand", winsound.SND_ASYNC | winsound.SND_ALIAS)
         return ips + ' - ★☆★☆ OK ☆★☆★'
     else:
         return ips + ' - FAIL!'

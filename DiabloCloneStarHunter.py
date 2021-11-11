@@ -7,22 +7,24 @@ from PyQt5.QtWidgets import *
 __TITLE__ = 'Diablo Clone Star Hunter 1.0'
 __PROGRAM_ID__ = 'DiabloCloneStarHunter'
 
-from D2IpScan import D2Window
+from D2IpScan import D2MainWindow
 from D2IpScan.D2Config import D2Config
 
 
-class MainApp(QWidget):
-    def __init__(self):
+class MainApp(QMainWindow):
+    def __init__(self, app):
         super().__init__()
-        config = D2Config(__PROGRAM_ID__)
-        D2Window.paintMainWindow(self, config)
-        self.showMainForm()
 
-    def showMainForm(self):
-        self.setWindowTitle(__TITLE__)
-        self.setWindowIcon(QIcon('star.png'))
-        self.setFixedSize(500, 600)
-        self.show()
+        widget = QWidget()
+        config = D2Config(__PROGRAM_ID__)
+        D2MainWindow.paintMainWindow(widget, config, app)
+        self.showMainForm(widget)
+
+    def showMainForm(self, win):
+        win.setWindowTitle(__TITLE__)
+        win.setWindowIcon(QIcon('star.png'))
+        win.setFixedSize(500, 600)
+        win.show()
 
 
 if __name__ == '__main__':
@@ -31,10 +33,8 @@ if __name__ == '__main__':
 
     app = QApplication(sys.argv)
     try:
-        mainApp = MainApp()
-        print('sys.exec_()')
+        mainApp = MainApp(app)
         app.exec_()
-        print('sys.exit()')
         sys.exit()
     except Exception as e:
         print(e)

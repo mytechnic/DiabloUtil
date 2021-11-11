@@ -329,7 +329,7 @@ class MainApp(QWidget):
             self.debugPrint(', '.join(gameIpList))
 
             isFind = D2ServerIp.isFindGameIp(targetIp, gameIpList)
-            self.paintFindIpResult(serverIpList, gameIpList, targetIp, isFind)
+            self.paintFindIpResult(serverIpList, gameIpList, targetIp)
 
             # IP 로그 기록
             if len(gameIpList) > 0:
@@ -614,11 +614,10 @@ class MainApp(QWidget):
 
         serverIpList = D2ServerIp.getServerIpList()
         gameIpList = D2ServerIp.getGameIpList(serverIpList)
-        isFind = D2ServerIp.isFindGameIp(targetIp, gameIpList)
 
-        self.paintFindIpResult(serverIpList, gameIpList, targetIp, isFind)
+        self.paintFindIpResult(serverIpList, gameIpList, targetIp)
 
-    def paintFindIpResult(self, serverIpList, gameIpList, targetIp, isFind):
+    def paintFindIpResult(self, serverIpList, gameIpList, targetIp):
         serverTitle = D2ServerIp.getGameRegion(serverIpList)
         self.serverTitle.setText(serverTitle)
         self.debugPrint('서버 IP - ' + ', '.join(serverIpList))

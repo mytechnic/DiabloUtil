@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8337dbd9-f518-48b5-aa85-eef486c9ff08" name="Default Changelist" comment="대기실 서버 IP 정보 추가">
-      <change afterPath="$PROJECT_DIR$/D2IpScan/D2Config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/D2IpScan/D2Firewall.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/D2IpScan/D2GameFlow.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/D2IpScan/D2GamePosition.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/D2IpScan/D2GameUnitAction.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/D2IpScan/D2ServerIp.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/D2IpScan/D2Timer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/D2IpScan/D2Window.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/D2IpScan/D2WindowUnit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/D2IpScan/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DiabloCloneStarHunter.py" afterDir="false" />
+    <list default="true" id="8337dbd9-f518-48b5-aa85-eef486c9ff08" name="Default Changelist" comment="새로운 버전 개발">
+      <change afterPath="$PROJECT_DIR$/D2IpScan/D2Dashboard.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/D2IpScan/D2DashboardUnit.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/D2IpScan/D2MainWindow.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/D2IpScan/D2MainWindowTopUnit.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/D2IpScan/FirewallTab.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/D2IpScan/FirewallTabUnit.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/D2IpScan/TargetIpHunterTab.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/D2IpScan/TargetIpHunterTabUnit.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sample.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/D2IpScan/D2Config.py" beforeDir="false" afterPath="$PROJECT_DIR$/D2IpScan/D2Config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/D2IpScan/D2ServerIp.py" beforeDir="false" afterPath="$PROJECT_DIR$/D2IpScan/D2ServerIp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/D2IpScan/D2Window.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/D2IpScan/D2WindowUnit.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunter.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/StarDiablo2AdminUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/StarDiablo2AdminUtils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,6 +126,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="sample" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="DiabloUtil" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sample.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.DiabloCloneStarHunter" />
@@ -224,7 +248,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636512305741</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="새로운 버전 개발">
+      <created>1636589956114</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1636589956114</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -244,6 +275,7 @@
     <MESSAGE value="초기 버전" />
     <MESSAGE value="서버 조회 추가" />
     <MESSAGE value="대기실 서버 IP 정보 추가" />
-    <option name="LAST_COMMIT_MESSAGE" value="대기실 서버 IP 정보 추가" />
+    <MESSAGE value="새로운 버전 개발" />
+    <option name="LAST_COMMIT_MESSAGE" value="새로운 버전 개발" />
   </component>
 </project>
