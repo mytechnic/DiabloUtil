@@ -7,18 +7,18 @@ import subprocess
 import sys
 import threading
 import time
-import winsound
 
 import pyautogui as gui
 import pygetwindow as gw
 import yaml
 from PyQt5 import QtCore
 from PyQt5 import QtGui
-from PyQt5 import QtTest
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 from pynput.keyboard import Controller
+
+from D2IpScan import D2ServerIp, D2Firewall, D2Timer, D2GameUnitAction, D2GamePosition
 
 
 class MainApp(QWidget):
@@ -65,25 +65,10 @@ class MainApp(QWidget):
         self.initUI()
 
     def sleep(self, n):
-        if n < 3000:
-            QtTest.QTest.qWait(n)
-            return
-
-        s = time.time() * 1000
-        count = math.ceil(n / 500)
-        for sec in range(count):
-            e = time.time() * 1000 - s
-            if e > n:
-                return
-
-            remainTime = math.floor((n - e) / 1000.0)
-            if remainTime >= 0:
-                self.remainSecTitle.setText(str(remainTime))
-                self.remainSecTitle.repaint()
-                QtTest.QTest.qWait(500)
-            else:
-                self.remainSecTitle.setText('0')
-                self.remainSecTitle.repaint()
+        D2Timer.sleep(n, lambda remainTime: {
+            self.remainSecTitle.setText(str(math.ceil(remainTime / 1000))),
+            self.remainSecTitle.repaint()
+        })
 
     def debugPrint(self, debugMessage):
         msg = self.now() + ' ' + debugMessage
@@ -153,34 +138,32 @@ class MainApp(QWidget):
         delay = (random.randrange(15, 40) / 100)
         gui.moveTo(x, y, delay)
 
-    def gameCreate(self, name, password, number, roomCreateDelay):
+    def gameCreate(self, position, name, password, number, roomCreateDelay):
         try:
             if not self.isMacroMode:
                 return False
 
             # 게임생성 탭메뉴
-            self.moveToAndClick(810, 75, 940, 98)
+            D2GameUnitAction.gameTabMenuAction(position)
 
             if not self.isMacroMode:
                 return False
 
             # 게임이름 입력
-            self.moveToAndClick(885, 150, 1135, 160)
             room = name + str(number)
-            gui.typewrite(room, interval=0.15)
+            D2GameUnitAction.gameTitleWriteAction(position, room)
 
             if not self.isMacroMode:
                 return False
 
             # 비밀번호 입력
-            self.moveToAndClick(885, 198, 1135, 208)
-            gui.typewrite(password, interval=0.2)
+            D2GameUnitAction.gamePasswordWriteAction(position, password)
 
             if not self.isMacroMode:
                 return False
 
             # 게임생성 대기시간 보기위해 이동
-            self.moveToOnly(945, 480, 1080, 505)
+            D2GameUnitAction.gameCreateButtonMove(position)
 
             if not self.isMacroMode:
                 return False
@@ -197,7 +180,7 @@ class MainApp(QWidget):
                 return False
 
             # 게임생성 버튼
-            self.moveToAndClick(945, 480, 1080, 505)
+            D2GameUnitAction.gameCreateButtonAction(position)
             self.debugPrint('게임을 생성합니다. - ' + room)
 
             # 생성된 게임이름 업데이트
@@ -218,20 +201,11 @@ class MainApp(QWidget):
             print(err)
             return False
 
-    def gameExit(self):
+    def gameExit(self, position):
         if not self.isMacroMode:
             return
 
-            # 메뉴 오픈
-        self.sleep(1000)
-        gui.hotkey('esc')
-
-        if not self.isMacroMode:
-            return
-
-        # 저장 및 종료 버튼
-        self.sleep(1000)
-        self.moveToAndClick(555, 355, 745, 380)
+        D2GameUnitAction.gameExitAction(position)
 
     def sleepModeAction(self, isSleepMode):
         self.setSleepMode(isSleepMode)
@@ -253,9 +227,9 @@ class MainApp(QWidget):
                 break
 
             # 잠자기
-            sleep = random.randrange(120, 300)
+            sleep = random.randrange(3, 12)
             self.debugPrint(str(sleep) + '초 동안 잠을 잡니다.')
-            self.sleep(random.randrange(30000, 120000))
+            self.sleep(sleep * 1000)
 
             if not self.isSleepMode:
                 break
@@ -333,13 +307,12 @@ class MainApp(QWidget):
             self.sleepModeButton.setText('잠수모드 실행')
 
     def runMacroAction(self, roomName, roomPassword, targetIp, monitoringDelaySec, number, roomCreateDelay):
-        window = gw.getWindowsWithTitle('Diablo II: Resurrected')[0]
-        window.top = 0
-        window.left = 0
+        D2GameUnitAction.gameWindowFocusAction()
+        position = D2GamePosition.getDisplayPosition('1280x768')
 
         while True:
             # 게임 생성
-            isActive = self.gameCreate(roomName, roomPassword, number, roomCreateDelay)
+            isActive = self.gameCreate(position, roomName, roomPassword, number, roomCreateDelay)
             if not isActive:
                 break
 
@@ -351,11 +324,11 @@ class MainApp(QWidget):
             if not self.isMacroMode:
                 break
 
-            serverIpList = self.getD2ServerIpAllList()
-            gameIpList = self.getD2GameIpList(serverIpList)
+            serverIpList = D2ServerIp.getServerIpList()
+            gameIpList = D2ServerIp.getGameIpList(serverIpList)
             self.debugPrint(', '.join(gameIpList))
 
-            isFind = self.isFindTargetIp(gameIpList, targetIp)
+            isFind = D2ServerIp.isFindGameIp(targetIp, gameIpList)
             self.paintFindIpResult(serverIpList, gameIpList, targetIp, isFind)
 
             # IP 로그 기록
@@ -381,7 +354,7 @@ class MainApp(QWidget):
                 break
 
             # 게임 종료
-            self.gameExit()
+            self.gameExit(position)
 
             if not self.isMacroMode:
                 break
@@ -400,7 +373,8 @@ class MainApp(QWidget):
         self.targetIpValue = QLineEdit(self.config.get('targetIp'))
         self.targetIpValue.setMinimumHeight(25)
         subLayout.addWidget(self.targetIpValue)
-        topMost = QCheckBox('맨위 고정', self)
+
+        topMost = QCheckBox('맨위 고정')
         topMost.stateChanged.connect(self.topMostChanged)
         subLayout.addWidget(topMost)
         layout.addLayout(subLayout)
@@ -418,6 +392,7 @@ class MainApp(QWidget):
         self.programPathValue = QLineEdit(self.config.get('program'))
         self.programPathValue.setReadOnly(True)
         self.programPathValue.setMinimumHeight(25)
+
         findGameButton = QPushButton('찾기..', self)
         findGameButton.setMinimumHeight(25)
         findGameButton.setMaximumWidth(50)
@@ -637,113 +612,19 @@ class MainApp(QWidget):
         self.findIpResult.setText('IP search ...')
         self.findIpResult.repaint()
 
-        serverIpList = self.getD2ServerIpAllList()
-        gameIpList = self.getD2GameIpList(serverIpList)
-        isFind = self.isFindTargetIp(gameIpList, targetIp)
+        serverIpList = D2ServerIp.getServerIpList()
+        gameIpList = D2ServerIp.getGameIpList(serverIpList)
+        isFind = D2ServerIp.isFindGameIp(targetIp, gameIpList)
 
         self.paintFindIpResult(serverIpList, gameIpList, targetIp, isFind)
 
-    def paintFindIpResult(self, serverIpList, gameIpList, findIp, isFind):
-        serverTitle = self.getServerTitle(serverIpList)
+    def paintFindIpResult(self, serverIpList, gameIpList, targetIp, isFind):
+        serverTitle = D2ServerIp.getGameRegion(serverIpList)
         self.serverTitle.setText(serverTitle)
         self.debugPrint('서버 IP - ' + ', '.join(serverIpList))
 
-        if len(gameIpList) > 0:
-            ip = ', '.join(gameIpList)
-            if findIp and isFind:
-                self.findIpResult.setText(ip + ' - OK! ★☆★☆★☆★')
-                winsound.PlaySound("SystemHand", winsound.SND_ASYNC | winsound.SND_ALIAS)
-            elif findIp:
-                self.findIpResult.setText(ip + ' - FAIL.')
-            else:
-                self.findIpResult.setText(ip)
-        else:
-            self.findIpResult.setText('게임 생성 후 IP 조회 버튼을 클릭 해 주세요.')
-
-    def getServerTitle(self, serverIpList):
-        if len(serverIpList) < 1:
-            return 'N/A'
-
-        # IP 확인
-        if '117.52.35.79' in serverIpList:
-            return '아시아(79)'
-        elif '117.52.35.179' in serverIpList:
-            return '아시아(179)'
-        elif '137.221.106.88' in serverIpList:
-            return '아메리카'
-        elif '37.244.28.80' in serverIpList:
-            return '유럽'
-        else:
-            return 'None'
-
-    def isFindTargetIp(self, ipList, targetIp):
-        if not targetIp:
-            return False
-
-        if len(ipList) < 1:
-            return False
-
-        # 멀티 IP
-        ips = targetIp.split(',')
-
-        # IP 확인
-        isFind = False
-        for d2Ip in ipList:
-            for ip in ips:
-                ip = ip.strip()
-                if d2Ip == ip:
-                    isFind = True
-                    break
-            if isFind:
-                break
-
-        return isFind
-
-    def getD2ServerIpAllList(self):
-        data = subprocess.run(['netstat', '-anob'], stdout=subprocess.PIPE, text=True)
-        arr = data.stdout.split("\n")
-
-        isD2Ip = False
-        d2IpList = []
-        for text in reversed(arr):
-            text = text.strip()
-            if text.startswith('['):
-                if text == "[D2R.exe]":
-                    isD2Ip = True
-                else:
-                    isD2Ip = False
-            else:
-                if isD2Ip:
-                    if (text.find(':443') != -1 and text.find('ESTABLISHED') != -1):
-                        z = text.split()
-                        z = z[2].split(':')
-                        ip = z[0]
-                        if ip not in d2IpList:
-                            d2IpList.append(ip)
-
-        return d2IpList
-
-    def getD2GameIpList(self, serverIpList):
-        d2IpList = []
-        for ip in serverIpList:
-            if (ip == '24.105.29.76'
-                    # 유럽
-                    or ip == '37.244.28.80'
-                    or ip == '104.76.67.204'
-                    # 아메리카
-                    or ip == '34.117.122.6'
-                    or ip == '137.221.106.88'):
-                continue
-
-            if (ip.startswith('34.')
-                    or ip.startswith('35.')
-                    or ip.startswith('104.')
-                    or ip.startswith('158.')
-                    or ip.startswith('37.')):
-                if ip not in d2IpList:
-                    d2IpList.append(ip)
-
-        return d2IpList
+        findResult = D2ServerIp.getGameFindResult(targetIp, gameIpList)
+        self.findIpResult.setText(findResult)
 
     def clearFirewall(self):
         data = subprocess.run(['netsh', 'advfirewall', 'firewall', 'show', 'rule', 'name=all', 'dir=out'],
@@ -770,50 +651,11 @@ class MainApp(QWidget):
         return socket.inet_ntoa(struct.pack("!I", ipValue))
 
     def setFirewall(self, program, targetIp):
-        z = targetIp.split('.')
-        o1 = int(z[0])
-        o2 = int(z[1])
-        o3 = int(z[2])
-        o4 = int(z[3])
+        firewallIpList = D2Firewall.getFirewallIpList(targetIp)
+        remoteip = ','.join(firewallIpList)
+        print(remoteip)
+        name = D2Firewall.getFirewallName(targetIp)
 
-        # 34, 35, 104, 158, 37, exclude: 34.117.122.6
-        ipRangeList = []
-        ipRangeList.append('34.1.1.1-34.117.122.5')
-        ipRangeList.append('34.117.122.7-34.255.255.255')
-        ipRangeList.append('35.1.1.1-35.255.255.255')
-        ipRangeList.append('104.1.1.1-104.255.255.255')
-        ipRangeList.append('158.1.1.1-158.255.255.255')
-
-        ipBlockList = []
-        for ipRange in ipRangeList:
-            if ipRange.startswith(str(o1) + '.'):
-                continue
-            ipBlockList.append(ipRange)
-
-        # 입력한 IP의 앞쪽 대역 추가
-        if o1 != 37:
-            ignoreIpValue = self.ip2int('34.117.122.6')
-            targetIpValue = self.ip2int(targetIp)
-            if o1 == 34:
-                if o2 > 117:
-                    ipBlockList.append('34.1.1.1-' + '34.116.255.255')
-                    ipBlockList.append('34.117.1.1-' + '34.117.122.5')
-                    ipBlockList.append('34.117.122.7-' + '34.' + str(o2 - 1) + '.255.255')
-                    ipBlockList.append('34.' + str(o2 + 1) + '.122.7-' + '34.255.255.255')
-                elif o2 < 117:
-                    ipBlockList.append('34.1.1.1-' + '34.116.255.255')
-                    ipBlockList.append('34.117.1.1-' + '34.117.122.5')
-                    ipBlockList.append('34.117.122.7-' + '34.' + str(o2 - 1) + '.255.255')
-                    ipBlockList.append('34.' + str(o2 + 1) + '.122.7-' + '34.255.255.255')
-                else:
-                    ipBlockList.append('34.1.1.1-' + '34.116.255.255')
-                    ipBlockList.append('34.118.1.1-34.255.255.255')
-            else:
-                ipBlockList.append(str(o1) + '.1.1.1-' + str(o1) + '.' + str(o2 - 1) + '.255.255')
-                ipBlockList.append(str(o1) + '.' + str(o2 + 1) + '.1.1-' + str(o1) + '.255.255.255')
-
-        remoteip = ','.join(ipBlockList)
-        name = '스타 우버디아 (' + str(o1) + '.' + str(o2) + '.x.x)'
         cmd = ['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=' + name, 'dir=out', 'program=' + program,
                'remoteip=' + remoteip, 'action=block', 'enable=yes']
         res = subprocess.run(cmd, stdout=subprocess.PIPE, text=True)
