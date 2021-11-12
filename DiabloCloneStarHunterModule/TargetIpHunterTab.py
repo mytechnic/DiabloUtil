@@ -183,6 +183,9 @@ def findIpSearchModeAutoStart():
 
     isGameIpHistory = True
     while config.get('autoFindIpMode').isChecked():
+        if config.get('killSignal'):
+            break
+
         gameIpList = gameIpSearchAction(isAddGameIpHistory=isGameIpHistory)
         if len(gameIpList) == 0:
             isFindGame = False
@@ -242,6 +245,9 @@ def findIpSearchModeStayStart(stayIp):
 
     config.get('stayIpValue').setText(stayIp)
     while config.get('stayGameIpMode').isChecked():
+        if config.get('killSignal'):
+            break
+
         gameIpList = gameIpSearchAction()
         if len(gameIpList) == 0:
             stayIpOutReaction(stayIp)
@@ -259,6 +265,9 @@ def stayIpOutReaction(stayIp):
     config = __CONFIG__
 
     while config.get('stayGameIpMode').isChecked():
+        if config.get('killSignal'):
+            break
+
         msg = stayIp + '(지킴이 모드 실패)'
         config.get('findIpResultValue').setText(msg)
         if config.get('dashboard').isVisible():

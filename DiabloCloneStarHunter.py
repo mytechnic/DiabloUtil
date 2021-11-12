@@ -4,7 +4,7 @@ import pygetwindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 
-__TITLE__ = 'Diablo Clone Star Hunter 1.0'
+__TITLE__ = 'Diablo Clone Star Hunter 1.1'
 __PROGRAM_ID__ = 'DiabloCloneStarHunter'
 
 from DiabloCloneStarHunterModule import D2MainWindow
@@ -19,6 +19,7 @@ class MainApp(QWidget):
 
         self.config = D2Config(__PROGRAM_ID__)
         self.config.set('programId', __PROGRAM_ID__)
+        self.config.set('killSignal', False)
 
         D2MainWindow.paintMainWindow(self, self.config, app)
         self.showMainForm()
@@ -28,6 +29,11 @@ class MainApp(QWidget):
         self.setWindowIcon(QIcon('star.png'))
         self.setFixedSize(500, 600)
         self.show()
+
+    def closeEvent(self, event):
+        self.config.set('killSignal', True)
+        self.exit()
+        event.accept()
 
     def exit(self):
         if self.config.get('dashboard'):
@@ -41,8 +47,6 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     try:
         mainApp = MainApp(app)
-        mainApp.exit()
-        app.exec_()
-        sys.exit()
+        sys.exit(app.exec_())
     except Exception as e:
         print(e)

@@ -84,6 +84,10 @@ def createFirewallButtonClickedEvent():
             QMessageBox.about(widget, '오류!!', '목표 IP를 입력 해 주세요.')
             return
 
+        if len(targetIp.split(',')) > 1:
+            QMessageBox.about(widget, '오류!!', '방화벽 설정을 위한 목표 IP는 1개만 지원 합니다.')
+            return
+
         if not programPath:
             QMessageBox.about(widget, '오류!!', 'D2R 경로를 찾아 주세요.')
             return

@@ -19,7 +19,7 @@ def targetIpForm(widget, config):
 
 
 def targetIpHelp(widget, config):
-    form = QLabel('※ 우버디아 IP를 입력하지 않을 경우 자동 게임생성이 진행되지 않습니다.', widget)
+    form = QLabel('※ 우버디아 IP는 컴마(,)를 구분자로 여러개 입력 가능합니다.', widget)
     form.setMinimumHeight(25)
     form.setTextInteractionFlags(Qt.TextSelectableByMouse)
     config.set('targetIpHelp', form)

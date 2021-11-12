@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import *
 
 from DiabloCloneStarHunterModule import D2DashboardUnit
 
-__TITLE__ = 'Diablo Clone Star Hunter 1.0 DASHBOARD'
+__TITLE__ = 'Diablo Clone Star Hunter DASHBOARD'
 __WIDTH__ = 800
 __HEIGHT__ = 25
 
