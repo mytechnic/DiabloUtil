@@ -1,7 +1,7 @@
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import *
 
-from D2IpScan import D2DashboardUnit
+from DiabloCloneStarHunterModule import D2DashboardUnit
 
 __TITLE__ = 'Diablo Clone Star Hunter 1.0 DASHBOARD'
 __WIDTH__ = 800
@@ -14,7 +14,10 @@ class DashboardApp(QWidget):
         self.initUI(app, config)
 
     def initUI(self, app, config):
-        self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.FramelessWindowHint)
+        self.setWindowFlags(self.windowFlags()
+                            | QtCore.Qt.WindowStaysOnTopHint
+                            | QtCore.Qt.FramelessWindowHint
+                            | QtCore.Qt.WA_ShowWithoutActivating)
         self.setWindowTitle(__TITLE__)
         self.center(app)
         self.setFixedSize(__WIDTH__, __HEIGHT__)

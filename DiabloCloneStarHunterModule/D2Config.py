@@ -37,9 +37,9 @@ class D2Config(object):
         self.config['config'][key] = value
 
     def loadConfig(self):
-        with open(self.configFile) as f:
+        with open(self.configFile, encoding='UTF8') as f:
             self.config = {'config': yaml.load(f, Loader=yaml.FullLoader)}
 
     def saveConfig(self):
-        with open(self.configFile, 'w') as f:
+        with open(self.configFile, 'w', encoding='UTF8') as f:
             yaml.dump(self.config['config'], f)

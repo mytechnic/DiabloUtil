@@ -5,8 +5,8 @@ import winsound
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import *
 
-from D2IpScan import D2ServerIp, D2Timer
-from D2IpScan.D2Config import D2Config
+from DiabloCloneStarHunterModule import D2ServerIp, D2Timer
+from DiabloCloneStarHunterModule.D2Config import D2Config
 
 __WIDGET__: QWidget = None
 __CONFIG__: D2Config = None
@@ -20,10 +20,10 @@ def targetIpHunterTabWidget(widget, config, app):
     __APP__ = app
 
     layout = QVBoxLayout()
-    layout.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft)
+    layout.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
 
     sub = QHBoxLayout()
-    sub.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft)
+    sub.setAlignment(QtCore.Qt.AlignLeft)
     sub.addWidget(config.get('findIpModeTitle'))
     sub.addWidget(config.get('manualFindIpMode'))
     sub.addWidget(config.get('autoFindIpMode'))
@@ -31,31 +31,31 @@ def targetIpHunterTabWidget(widget, config, app):
     layout.addLayout(sub)
 
     sub = QHBoxLayout()
-    sub.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft)
+    sub.setAlignment(QtCore.Qt.AlignLeft)
     sub.addWidget(config.get('findIpRegionTitle'))
     sub.addWidget(config.get('findIpRegionResult'))
     layout.addLayout(sub)
 
     sub = QHBoxLayout()
-    sub.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft)
+    sub.setAlignment(QtCore.Qt.AlignLeft)
     sub.addWidget(config.get('findIpResultTitle'))
     sub.addWidget(config.get('findIpResultValue'))
     layout.addLayout(sub)
 
     sub = QHBoxLayout()
-    sub.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft)
+    sub.setAlignment(QtCore.Qt.AlignLeft)
     sub.addWidget(config.get('stayIpTitle'))
     sub.addWidget(config.get('stayIpValue'))
     layout.addLayout(sub)
 
     sub = QHBoxLayout()
-    sub.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft)
+    sub.setAlignment(QtCore.Qt.AlignLeft)
     sub.addWidget(config.get('findAllIpResultTitle'))
     sub.addWidget(config.get('findAllIpResultValue'))
     layout.addLayout(sub)
 
     sub = QHBoxLayout()
-    sub.setAlignment(QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft)
+    sub.setAlignment(QtCore.Qt.AlignLeft)
     sub.addWidget(config.get('autoFindTimerTitle'))
     sub.addWidget(config.get('autoFindTimerValue'))
     sub.addWidget(config.get('autoFindTimerUnit'))
@@ -71,16 +71,16 @@ def targetIpHunterTabWidget(widget, config, app):
     sub.addWidget(config.get('gameIpHistory'))
     layout.addLayout(sub)
 
-    widget = QWidget()
-    widget.setLayout(layout)
-
     group = QButtonGroup(widget)
     group.addButton(config.get('manualFindIpMode'))
     group.addButton(config.get('autoFindIpMode'))
     group.addButton(config.get('stayGameIpMode'))
 
+    config.get('manualFindIpMode').setChecked(True)
     findIpSearchModeManualMode()
 
+    widget = QWidget()
+    widget.setLayout(layout)
     return widget
 
 
@@ -122,6 +122,7 @@ def stayModeClickedEvent():
 
 
 def gameIpSearchButtonClickedEvent():
+    targetIpHunterConfigSave()
     gameIpSearchAction(True, True)
 
 
@@ -161,7 +162,7 @@ def findIpSearchModeManualMode():
     config.set('findIpMode', 'MANUAL')
     config.get('targetIpForm').setReadOnly(False)
     config.get('gameIpSearchButton').setDisabled(False)
-    config.get('stayIpValue').setText('')
+    config.get('stayIpValue').setText('N/A')
     targetIpHunterConfigSave()
 
 
@@ -171,7 +172,7 @@ def findIpSearchModeAutoMode():
     config.set('findIpMode', 'AUTO')
     config.get('targetIpForm').setReadOnly(True)
     config.get('gameIpSearchButton').setDisabled(True)
-    config.get('stayIpValue').setText('')
+    config.get('stayIpValue').setText('N/A')
 
     startGameIpTimer()
     targetIpHunterConfigSave()
@@ -202,13 +203,12 @@ def findIpSearchModeStayMode():
     config.set('findIpMode', 'STAY')
     config.get('targetIpForm').setReadOnly(True)
     config.get('gameIpSearchButton').setDisabled(True)
-    config.get('stayIpValue').setText('')
+    config.get('stayIpValue').setText('N/A')
     targetIpHunterConfigSave()
 
 
 def gameIpSearchAction(isReaction=False, isAddGameIpHistory=False):
     config = __CONFIG__
-    targetIpHunterConfigSave()
 
     targetIp = config.getConfig('targetIp')
     serverIpList = D2ServerIp.getServerIpList()
@@ -267,10 +267,14 @@ def stayIpOutReaction(stayIp):
         D2Timer.sleep(2000)
 
 
+def now():
+    return time.strftime('%H시 %M분 %S초', time.localtime(time.time()))
+
+
 def addGameIpHistory(gameIpList):
     config = __CONFIG__
 
-    msg = ', '.join(gameIpList)
+    msg = now() + ' - ' + ', '.join(gameIpList)
     config.get('gameIpHistory').setText(config.get('gameIpHistory').toPlainText() + msg + "\n")
     config.get('gameIpHistory').moveCursor(QtGui.QTextCursor.End)
 
@@ -278,9 +282,6 @@ def addGameIpHistory(gameIpList):
 def startGameIpTimer():
     config = __CONFIG__
 
-    try:
-        if not config.get('autoFindTimerStart'):
-            config.get('autoFindIpTimer').start()
-        config.set('autoFindTimerStart', time.time())
-    except Exception as e:
-        print(e)
+    if not config.get('autoFindTimerStart'):
+        config.get('autoFindIpTimer').start()
+    config.set('autoFindTimerStart', time.time())

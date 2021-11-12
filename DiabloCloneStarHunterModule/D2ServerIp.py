@@ -5,8 +5,16 @@ import psutil
 
 def getServerIpList():
     serverIpList = []
-    for conn in psutil.net_connections():
-        if psutil.Process(conn.pid).name() != 'D2R.exe':
+    connections = psutil.net_connections()
+    cache = {}
+    for conn in connections:
+        if conn.pid in cache:
+            name = cache[conn.pid]
+        else:
+            name = psutil.Process(conn.pid).name()
+            cache[conn.pid] = name
+
+        if name != 'D2R.exe':
             continue
 
         if conn.status != 'ESTABLISHED':

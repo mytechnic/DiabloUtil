@@ -3,7 +3,7 @@ import random
 import pyautogui
 import pygetwindow
 
-from D2IpScan import D2Timer
+from DiabloCloneStarHunterModule import D2Timer
 
 
 def moveRelAndClick(x1, y1, x2, y2):

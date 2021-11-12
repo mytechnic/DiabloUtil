@@ -1,4 +1,4 @@
-from D2IpScan import D2GameUnitAction, D2Config
+from DiabloCloneStarHunterModule import D2GameUnitAction, D2Config
 
 
 def gameCreateFlow(position, title, password):

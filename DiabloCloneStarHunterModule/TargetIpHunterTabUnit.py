@@ -3,7 +3,7 @@ from PyQt5 import QtGui
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import *
 
-from D2IpScan.D2Dashboard import DashboardApp
+from DiabloCloneStarHunterModule.D2Dashboard import DashboardApp
 
 
 def findIpModeTitle(widget, config):
@@ -18,26 +18,26 @@ def findIpModeTitle(widget, config):
     config.set('findIpModeTitle', form)
 
 
-def manualFindIpMode(widget, config, ClickedEvent):
+def manualFindIpMode(widget, config, clickedEvent):
     form = QRadioButton('수동검색 모드', widget)
     form.setChecked(True)
-    form.clicked.connect(ClickedEvent)
+    form.clicked.connect(clickedEvent)
     form.setMinimumHeight(25)
     config.set('manualFindIpMode', form)
 
 
-def autoFindIpMode(widget, config, ClickedEvent):
+def autoFindIpMode(widget, config, clickedEvent):
     form = QRadioButton('자동검색 모드', widget)
     form.setChecked(False)
-    form.clicked.connect(ClickedEvent)
+    form.clicked.connect(clickedEvent)
     form.setMinimumHeight(25)
     config.set('autoFindIpMode', form)
 
 
-def stayGameIpMode(widget, config, ClickedEvent):
+def stayGameIpMode(widget, config, clickedEvent):
     form = QRadioButton('지킴이 모드', widget)
     form.setChecked(False)
-    form.clicked.connect(ClickedEvent)
+    form.clicked.connect(clickedEvent)
     form.setMinimumHeight(25)
     config.set('stayGameIpMode', form)
 
@@ -154,23 +154,23 @@ def autoFindIpTimer(widget, config, timeoutAction):
     config.set('autoFindIpTimer', form)
 
 
-def gameIpSearchButton(widget, config, ClickedEvent):
+def gameIpSearchButton(widget, config, clickedEvent):
     form = QPushButton('아이피 검색', widget)
-    form.clicked.connect(ClickedEvent)
+    form.clicked.connect(clickedEvent)
     form.setMinimumHeight(40)
     config.set('gameIpSearchButton', form)
 
 
-def gameIpHistoryClearButton(widget, config, ClickedEvent):
-    form = QPushButton('로그 초기화', widget)
-    form.clicked.connect(ClickedEvent)
+def gameIpHistoryClearButton(widget, config, clickedEvent):
+    form = QPushButton('IP 로그 초기화', widget)
+    form.clicked.connect(clickedEvent)
     form.setMinimumHeight(40)
     config.set('gameIpHistoryClearButton', form)
 
 
-def dashboardOpenButton(widget, config, ClickedEvent):
+def dashboardOpenButton(widget, config, clickedEvent):
     form = QPushButton('전광판', widget)
-    form.clicked.connect(ClickedEvent)
+    form.clicked.connect(clickedEvent)
     form.setMinimumHeight(40)
     config.set('dashboardOpenButton', form)
 

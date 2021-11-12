@@ -18,7 +18,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 from pynput.keyboard import Controller
 
-from D2IpScan import D2ServerIp, D2Firewall, D2Timer, D2GameUnitAction, D2GamePosition
+from DiabloCloneStarHunterModule import D2ServerIp, D2Firewall, D2Timer, D2GameUnitAction, D2GamePosition
 
 
 class MainApp(QWidget):
