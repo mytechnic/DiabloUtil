@@ -2,7 +2,7 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import QVBoxLayout, QTabWidget, QWidget, QHBoxLayout
 
 from DiabloCloneStarHunterModule import TargetIpHunterTabUnit, TargetIpHunterTab, D2MainWindowTopUnit, FirewallTab, \
-    FirewallTabUnit, HelpTab
+    FirewallTabUnit, HelpTab, DashboardConfigTab, DashboardConfigTabUnit
 from DiabloCloneStarHunterModule.D2Config import D2Config
 
 __WIDGET__: QWidget = None
@@ -10,10 +10,14 @@ __CONFIG__: D2Config = None
 
 
 def paintMainWindow(widget, config, app):
+    global __WIDGET__, __CONFIG__
+    __WIDGET__ = widget
+    __CONFIG__ = config
+
     loadWindowUnit(widget, config, app)
 
     layout = QVBoxLayout()
-    layout.addLayout(getHeaderLayout(widget, config))
+    layout.addLayout(getHeaderLayout(config))
     layout.addLayout(getTabLayout(widget, config, app))
     widget.setLayout(layout)
 
@@ -42,7 +46,7 @@ def loadWindowUnit(widget, config, app):
     TargetIpHunterTabUnit.autoFindIpTimer(widget, config, TargetIpHunterTab.autoFindIpTimerTimeoutEvent)
     TargetIpHunterTabUnit.gameIpSearchButton(widget, config, TargetIpHunterTab.gameIpSearchButtonClickedEvent)
     TargetIpHunterTabUnit.dashboardOpenButton(widget, config, TargetIpHunterTab.dashboardOpenButtonClickedEvent)
-    TargetIpHunterTabUnit.gameIpHistoryClearButton(widget, config, TargetIpHunterTab.GameIpClearClickedEvent)
+    TargetIpHunterTabUnit.gameIpResetButton(widget, config, TargetIpHunterTab.gameIpResetClickedEvent)
     TargetIpHunterTabUnit.gameIpHistory(widget, config)
     TargetIpHunterTabUnit.dashboard(app, config)
 
@@ -58,12 +62,13 @@ def loadWindowUnit(widget, config, app):
     FirewallTabUnit.deleteFirewallButton(widget, config, FirewallTab.deleteFirewallButtonClickedEvent)
     FirewallTabUnit.openFirewallButton(widget, config, FirewallTab.openFirewallButtonClickedEvent)
 
+    DashboardConfigTabUnit.dashboardConfigValue(widget, config)
+    DashboardConfigTabUnit.dashboardFontConfigButton(widget, config, DashboardConfigTab.fontConfigButtonClickedEvent)
+    DashboardConfigTabUnit.dashboardFontColorForm(widget, config, DashboardConfigTab.fontColorFormClickedEvent)
+    DashboardConfigTabUnit.dashboardPositionButton(widget, config, DashboardConfigTab.positionButtonClickedEvent)
 
-def getHeaderLayout(widget, config):
-    global __WIDGET__, __CONFIG__
-    __WIDGET__ = widget
-    __CONFIG__ = config
 
+def getHeaderLayout(config):
     layout = QVBoxLayout()
 
     sub = QHBoxLayout()
@@ -88,11 +93,8 @@ def getTabLayout(widget, config, app):
 
     tabs.addTab(TargetIpHunterTab.targetIpHunterTabWidget(widget, config, app), "게임IP 조회")
     tabs.addTab(FirewallTab.firewallTabWidget(widget, config), "방화벽 설정")
+    tabs.addTab(DashboardConfigTab.dashboardConfigTabWidget(widget, config, app), "전광판 설정")
     tabs.addTab(HelpTab.helpTabWidget(widget, config), "도움말")
-
-    tabs.setTabToolTip(0, "게임의 IP를 조회 할 수 있습니다.")
-    tabs.setTabToolTip(1, "방화벽을 설정 또는 삭제 할 수 있습니다.")
-    tabs.setTabToolTip(2, "도움말")
 
     layout = QVBoxLayout()
     layout.addWidget(tabs)

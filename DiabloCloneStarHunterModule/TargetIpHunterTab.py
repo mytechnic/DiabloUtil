@@ -63,8 +63,8 @@ def targetIpHunterTabWidget(widget, config, app):
 
     sub = QHBoxLayout()
     sub.addWidget(config.get('gameIpSearchButton'))
-    sub.addWidget(config.get('gameIpHistoryClearButton'))
     sub.addWidget(config.get('dashboardOpenButton'))
+    sub.addWidget(config.get('gameIpResetButton'))
     layout.addLayout(sub)
 
     sub = QHBoxLayout()
@@ -126,9 +126,14 @@ def gameIpSearchButtonClickedEvent():
     gameIpSearchAction(True, True)
 
 
-def GameIpClearClickedEvent():
+def gameIpResetClickedEvent():
     config = __CONFIG__
     config.get('gameIpHistory').setText('')
+    config.get('autoFindIpTimer').stop()
+    config.set('autoFindTimerStart', time.time())
+    config.get('autoFindTimerValue').setText('0')
+    if config.get('dashboard').isVisible():
+        config.get('dashboardTimer').setText('0 초')
 
 
 def dashboardOpenButtonClickedEvent():
@@ -291,6 +296,6 @@ def addGameIpHistory(gameIpList):
 def startGameIpTimer():
     config = __CONFIG__
 
-    if not config.get('autoFindTimerStart'):
+    if not config.get('autoFindTimerStart') or not config.get('autoFindIpTimer').isActive():
         config.get('autoFindIpTimer').start()
     config.set('autoFindTimerStart', time.time())

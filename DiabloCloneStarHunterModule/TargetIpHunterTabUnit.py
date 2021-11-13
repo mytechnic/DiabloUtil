@@ -3,7 +3,7 @@ from PyQt5 import QtGui
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtWidgets import *
 
-from DiabloCloneStarHunterModule.D2Dashboard import DashboardApp
+from DiabloCloneStarHunterModule.Dashboard import DashboardApp
 
 
 def findIpModeTitle(widget, config):
@@ -151,6 +151,7 @@ def autoFindIpTimer(widget, config, timeoutAction):
     form = QTimer(widget)
     form.setInterval(200)
     form.timeout.connect(timeoutAction)
+    form.isActive()
     config.set('autoFindIpTimer', form)
 
 
@@ -161,11 +162,11 @@ def gameIpSearchButton(widget, config, clickedEvent):
     config.set('gameIpSearchButton', form)
 
 
-def gameIpHistoryClearButton(widget, config, clickedEvent):
-    form = QPushButton('IP 로그 초기화', widget)
+def gameIpResetButton(widget, config, clickedEvent):
+    form = QPushButton('초기화', widget)
     form.clicked.connect(clickedEvent)
     form.setMinimumHeight(40)
-    config.set('gameIpHistoryClearButton', form)
+    config.set('gameIpResetButton', form)
 
 
 def dashboardOpenButton(widget, config, clickedEvent):

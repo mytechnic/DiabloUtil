@@ -4,10 +4,10 @@ import pygetwindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 
-__TITLE__ = 'Diablo Clone Star Hunter 1.14'
+__TITLE__ = 'Diablo Clone Star Hunter Master 1.00'
 __PROGRAM_ID__ = 'DiabloCloneStarHunter'
 
-from DiabloCloneStarHunterModule import D2MainWindow
+from DiabloCloneStarHunterMasterModule import D2MasterMainWindow
 from DiabloCloneStarHunterModule.D2Config import D2Config
 
 
@@ -21,7 +21,7 @@ class MainApp(QWidget):
         self.config.set('programId', __PROGRAM_ID__)
         self.config.set('killSignal', False)
 
-        D2MainWindow.paintMainWindow(self, self.config, app)
+        D2MasterMainWindow.paintMainWindow(self, self.config, app)
         self.showMainForm()
 
     def showMainForm(self):

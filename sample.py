@@ -1,43 +1,47 @@
 import sys
-from random import randint
 
-from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QLabel, QVBoxLayout, QWidget
+from PyQt5.QtCore import Qt, QPoint
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QDesktopWidget
 
 
-class AnotherWindow(QWidget):
-    """
-    This "window" is a QWidget. If it has no parent, it
-    will appear as a free-floating window as we want.
-    """
-
+class cssden(QMainWindow):
     def __init__(self):
         super().__init__()
-        layout = QVBoxLayout()
-        self.label = QLabel("Another Window % d" % randint(0, 100))
-        layout.addWidget(self.label)
-        self.setLayout(layout)
+
+        # <MainWindow Properties>
+        self.setFixedSize(320, 450)
+        self.setStyleSheet("QMainWindow{background-color: darkgray;border: 1px solid black}")
+        self.setWindowFlags(Qt.FramelessWindowHint)
+        self.center()
+        # </MainWindow Properties>
+
+        # <Label Properties>
+        self.lbl = QLabel(self)
+        self.lbl.setText("test")
+        self.lbl.setStyleSheet(
+            "QLabel{background-color: rgb(0,0,0); border: 1px solid red; color: rgb(255,255,255); font: bold italic 20pt 'Times New Roman';}")
+        self.lbl.setGeometry(5, 5, 60, 40)
+        # </Label Properties>
+
+        self.oldPos = self.pos()
+        self.show()
+
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
+
+    def mousePressEvent(self, event):
+        self.oldPos = event.globalPos()
+
+    def mouseMoveEvent(self, event):
+        delta = QPoint(event.globalPos() - self.oldPos)
+        self.move(self.x() + delta.x(), self.y() + delta.y())
+        self.oldPos = event.globalPos()
 
 
-class MainWindow(QMainWindow):
-
-    def __init__(self):
-        super().__init__()
-        self.setWindowTitle('XXXXX')
-        self.w = None  # No external window yet.
-        self.button = QPushButton("Push for Window")
-        self.button.clicked.connect(self.show_new_window)
-        self.setCentralWidget(self.button)
-
-    def show_new_window(self, checked):
-        if self.w is None:
-            self.w = AnotherWindow()
-            self.w.show()
-
-
-
-
-app = QApplication(sys.argv)
-w = MainWindow()
-w.show()
-app.exec_()
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    ex = cssden()
+    sys.exit(app.exec_())
