@@ -4,7 +4,7 @@ import pygetwindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 
-__TITLE__ = 'Diablo Clone Star Hunter 1.1'
+__TITLE__ = 'Diablo Clone Star Hunter 1.11'
 __PROGRAM_ID__ = 'DiabloCloneStarHunter'
 
 from DiabloCloneStarHunterModule import D2MainWindow

@@ -33,7 +33,6 @@ def moveToOnly(x1, y1, x2, y2):
 def gameWindowFocusAction():
     window = pygetwindow.getWindowsWithTitle('Diablo II: Resurrected')[0]
     window.activate()
-    window.resizeTo(1280, 768)
     window.top = 0
     window.left = 0
 

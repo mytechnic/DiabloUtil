@@ -24,11 +24,9 @@ def helpTabWidget(widget, config):
         with open(helpFile, encoding='UTF8') as f:
             content = f.read()
 
-    form = QLabel(content, widget)
-    form.setMinimumWidth(470)
-    form.setMaximumWidth(470)
-    form.setWordWrap(True)
+    form = QTextEdit('', widget)
     form.setTextInteractionFlags(Qt.TextSelectableByMouse)
+    form.setPlainText(content)
     layout.addWidget(form)
 
     widget = QWidget()

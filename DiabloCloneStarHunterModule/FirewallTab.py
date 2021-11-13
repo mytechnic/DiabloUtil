@@ -102,7 +102,7 @@ def createFirewallButtonClickedEvent():
         if ret:
             QMessageBox.about(widget, '성공!!', '방화벽이 설정 되었습니다.')
         else:
-            QMessageBox.about(widget, '오류!!', '방화벽 설정에 실패 하였습니다.')
+            QMessageBox.about(widget, '오류!!', '방화벽 설정에 실패 하였습니다.(관리자 실행 권한 필요)')
 
         config.get('firewallPolicySetResult').setText('\n'.join(firewallIpList))
     except Exception as e:
@@ -117,7 +117,7 @@ def deleteFirewallButtonClickedEvent():
         if ret:
             QMessageBox.about(widget, '성공!!', '방화벽이 삭제 되었습니다.')
         else:
-            QMessageBox.about(widget, '오류!!', '방화벽 삭제에 실패 하였습니다.')
+            QMessageBox.about(widget, '오류!!', '방화벽 삭제에 실패 하였습니다.(관리자 실행 권한 필요)')
     except Exception as e:
         print(e)
 
