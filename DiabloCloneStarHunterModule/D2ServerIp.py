@@ -38,16 +38,20 @@ def getServerIpList():
     return serverIpList
 
 
+def getClientIpList():
+    return [
+        '24.105.29.76', '34.117.122.6',
+        '37.244.28.80', '37.244.28.180', '37.244.54.10',
+        '137.221.106.88', '137.221.106.188', '137.221.105.152',
+        '117.52.35.45', '117.52.35.79', '117.52.35.179'
+    ]
+
+
 def getGameIpList(serverIpList):
+    clientIpList = getClientIpList()
     gameIpList = []
     for ip in serverIpList:
-        if (ip == '24.105.29.76'
-                # 유럽
-                or ip == '37.244.28.80'
-                or ip == '104.76.67.204'
-                # 아메리카
-                or ip == '34.117.122.6'
-                or ip == '137.221.106.88'):
+        if ip in clientIpList:
             continue
 
         if (ip.startswith('34.')
@@ -66,16 +70,26 @@ def getGameRegion(serverIpList):
         return 'N/A'
 
     # IP 확인
-    if '117.52.35.79' in serverIpList:
+    if '117.52.35.45' in serverIpList:
+        return '아시아(45)'
+    elif '117.52.35.79' in serverIpList:
         return '아시아(79)'
     elif '117.52.35.179' in serverIpList:
         return '아시아(179)'
     elif '137.221.106.88' in serverIpList:
-        return '아메리카'
+        return '아메리카(88)'
+    elif '137.221.106.188' in serverIpList:
+        return '아메리카(188)'
+    elif '137.221.105.152' in serverIpList:
+        return '아메리카(152)'
     elif '37.244.28.80' in serverIpList:
-        return '유럽'
+        return '유럽(80)'
+    elif '37.244.28.180' in serverIpList:
+        return '유럽(180)'
+    elif '37.244.54.10' in serverIpList:
+        return '유럽(10)'
     else:
-        return 'None'
+        return '알수없음'
 
 
 def isFindGameIp(targetIp, gameIpList):

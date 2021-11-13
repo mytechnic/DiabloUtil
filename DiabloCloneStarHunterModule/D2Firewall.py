@@ -31,6 +31,9 @@ def getFirewallIpList(targetIp, firewallClass='B'):
             if firewallClass == 'B':
                 firewallIpList.append(str(g1) + '.1.1.1-' + str(g1) + '.' + str(o2 - 1) + '.255.255')
                 firewallIpList.append(str(g1) + '.' + str(o2 + 1) + '.1.1-' + str(g1) + '.255.255.255')
+        elif g1 == '34':
+            firewallIpList.append('34.1.1.1-' + '34.117.122.5')
+            firewallIpList.append('34.117.122.7-' + '34.255.255.255')
         else:
             firewallIpList.append(str(g1) + '.1.1.1-' + str(g1) + '.255.255.255')
 
