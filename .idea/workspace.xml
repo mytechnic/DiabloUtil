@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8337dbd9-f518-48b5-aa85-eef486c9ff08" name="Default Changelist" comment="배포버전 1.0">
+    <list default="true" id="8337dbd9-f518-48b5-aa85-eef486c9ff08" name="Default Changelist" comment="배포버전 1.11">
+      <change afterPath="$PROJECT_DIR$/저작권 관련정보/4570803_shield_star_superhero_weapon_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/저작권 관련정보/star.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/저작권 관련정보/창작자 라이센스.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunter.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2GameUnitAction.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2GameUnitAction.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/FirewallTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/FirewallTab.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/HelpTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/HelpTab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star.ico" beforeDir="false" afterPath="$PROJECT_DIR$/star.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/star.png" beforeDir="false" afterPath="$PROJECT_DIR$/star.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,14 +44,15 @@
     <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/D2IpScan" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\App\Project\DiabloUtil\D2IpScan" />
       <recent name="C:\App\Project\DiabloUtil" />
+      <recent name="C:\App\Project\DiabloUtil\저작권 관련정보" />
+      <recent name="C:\App\Project\DiabloUtil\D2IpScan" />
     </key>
   </component>
   <component name="RunManager" selected="Python.DiabloCloneStarHunter">
@@ -258,7 +262,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636724845296</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="배포버전 1.11">
+      <created>1636772089251</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1636772089251</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -281,6 +292,7 @@
     <MESSAGE value="새로운 버전 개발" />
     <MESSAGE value="게임IP 조회 개발 완료" />
     <MESSAGE value="배포버전 1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="배포버전 1.0" />
+    <MESSAGE value="배포버전 1.11" />
+    <option name="LAST_COMMIT_MESSAGE" value="배포버전 1.11" />
   </component>
 </project>
