@@ -1,24 +1,15 @@
-from PyQt5 import QtGui
-from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import *
 
 from DiabloCloneStarHunterModule import DashboardConfigTab
 
 
 def dashboardConfigValue(widget: QWidget, config):
-    family = config.getConfig('dashboardFontFamily') or widget.font().family()
-    pointSize = config.getConfig('dashboardFontPointSize') or 20
-    weight = config.getConfig('dashboardFontWeight') or QFont.Bold
-    italic = config.getConfig('dashboardFontItalic') or False
-    strikeOut = config.getConfig('dashboardFontStrikeOut') or False
-    underline = config.getConfig('dashboardFontUnderline') or False
-
-    font = QtGui.QFont(family, pointSize, weight, italic)
-    font.setStrikeOut(strikeOut)
-    font.setUnderline(underline)
+    font = DashboardConfigTab.getDashboardFont(config)
+    color = DashboardConfigTab.getDashboardFontColor(config)
 
     form = QLabel('34.93.77.77', widget)
-    form.setFont(DashboardConfigTab.getDashboardFont(config))
+    form.setFont(font)
+    form.setStyleSheet('color: ' + color.name())
     config.set('dashboardConfigValue', form)
 
 

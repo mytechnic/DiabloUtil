@@ -1,3 +1,4 @@
+import os
 import sys
 
 import pygetwindow
@@ -44,6 +45,7 @@ if __name__ == '__main__':
     if len(pygetwindow.getWindowsWithTitle(__TITLE__)) > 0:
         sys.exit(0)
 
+    os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
     app = QApplication(sys.argv)
     try:
         mainApp = MainApp(app)

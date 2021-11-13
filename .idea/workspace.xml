@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8337dbd9-f518-48b5-aa85-eef486c9ff08" name="Default Changelist" comment="배포버전 1.13">
-      <change afterPath="$PROJECT_DIR$/DiabloCloneStarHunterMaster.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DiabloCloneStarHunterMasterModule/D2MasterMainWindow.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DiabloCloneStarHunterMasterModule/GameHunterTab.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DiabloCloneStarHunterMasterModule/GameHunterTabUnit.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DiabloCloneStarHunterMasterModule/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/Dashboard.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardConfigTab.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardConfigTabUnit.py" afterDir="false" />
+    <list default="true" id="8337dbd9-f518-48b5-aa85-eef486c9ff08" name="Default Changelist" comment="배포버전 1.14">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunter.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2Dashboard.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2DashboardUnit.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardUnit.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2MainWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2MainWindow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/TargetIpHunterTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/TargetIpHunterTab.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/TargetIpHunterTabUnit.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/TargetIpHunterTabUnit.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/Dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/Dashboard.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardConfigTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardConfigTab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardConfigTabUnit.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardConfigTabUnit.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -364,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636780372674</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="배포버전 1.14">
+      <created>1636804021240</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1636804021240</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -420,7 +416,8 @@
     <MESSAGE value="배포버전 1.11" />
     <MESSAGE value="배포버전 1.12" />
     <MESSAGE value="배포버전 1.13" />
-    <option name="LAST_COMMIT_MESSAGE" value="배포버전 1.13" />
+    <MESSAGE value="배포버전 1.14" />
+    <option name="LAST_COMMIT_MESSAGE" value="배포버전 1.14" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

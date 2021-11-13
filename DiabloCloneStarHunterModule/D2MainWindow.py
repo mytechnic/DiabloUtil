@@ -65,7 +65,6 @@ def loadWindowUnit(widget, config, app):
     DashboardConfigTabUnit.dashboardConfigValue(widget, config)
     DashboardConfigTabUnit.dashboardFontConfigButton(widget, config, DashboardConfigTab.fontConfigButtonClickedEvent)
     DashboardConfigTabUnit.dashboardFontColorForm(widget, config, DashboardConfigTab.fontColorFormClickedEvent)
-    DashboardConfigTabUnit.dashboardPositionButton(widget, config, DashboardConfigTab.positionButtonClickedEvent)
 
 
 def getHeaderLayout(config):

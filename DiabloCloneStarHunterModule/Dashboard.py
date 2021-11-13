@@ -1,13 +1,13 @@
 from PyQt5 import QtGui
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import (QVBoxLayout, QWidget, QHBoxLayout)
+from PyQt5.QtWidgets import (QWidget, QHBoxLayout)
 
 from DiabloCloneStarHunterModule import DashboardUnit, DashboardConfigTab
 from DiabloCloneStarHunterModule.D2Config import D2Config
 
 __TITLE__ = 'Diablo Clone Star Hunter DASHBOARD'
 __WIDTH__ = 1000
-__HEIGHT__ = 25
+__HEIGHT__ = 200
 __CONFIG__: D2Config = None
 
 
@@ -27,7 +27,7 @@ class DashboardApp(QWidget):
         x = config.getConfig('dashboardPosX') or defaultX
         y = config.getConfig('dashboardPosY') or 40
 
-        if width < x - 40 or height < y - 40:
+        if width < x - 40 or height < y - 40 or x < 0 or y < 0:
             x = defaultX
             y = 40
 
@@ -36,9 +36,10 @@ class DashboardApp(QWidget):
     def initUI(self, app, config):
 
         self.setWindowTitle(__TITLE__)
-        self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.WA_ShowWithoutActivating)
+        self.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint
+                            | Qt.WA_ShowWithoutActivating & ~Qt.WindowMaximizeButtonHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.resize(__WIDTH__, __HEIGHT__)
+        self.setFixedSize(__WIDTH__, __HEIGHT__)
         x, y = self.getAppPosition(app, config)
         self.move(x, y)
 
@@ -53,10 +54,7 @@ class DashboardApp(QWidget):
         sub.addWidget(config.get('dashboardGameIp'))
         sub.addWidget(config.get('dashboardTimer'))
 
-        layout = QVBoxLayout()
-        layout.setContentsMargins(0, 0, 0, 0)
-        layout.addLayout(sub)
-        self.setLayout(layout)
+        self.setLayout(sub)
 
     def moveEvent(self, event: QtGui.QMoveEvent) -> None:
         config = __CONFIG__

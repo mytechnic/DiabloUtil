@@ -23,7 +23,6 @@ def dashboardConfigTabWidget(widget, config, app):
     sub = QHBoxLayout()
     sub.addWidget(config.get('dashboardFontConfigButton'))
     sub.addWidget(config.get('dashboardFontColorForm'))
-    sub.addWidget(config.get('dashboardPositionConfigButton'))
     layout.addLayout(sub)
 
     sub = QHBoxLayout()
@@ -86,20 +85,3 @@ def fontColorFormClickedEvent():
         config.get('dashboardConfigValue').setStyleSheet("color: %s" % color.name())
         config.get('dashboardGameIp').setStyleSheet("color: %s" % color.name())
         config.get('dashboardTimer').setStyleSheet("color: %s" % color.name())
-
-
-def positionButtonClickedEvent():
-    config = __CONFIG__
-
-    if config.get('dashboardPositionConfigButton').text() == '위치 설정':
-        app = config.get('dashboard')
-        app.setWindowFlags(Qt.WindowStaysOnTopHint)
-        app.show()
-        config.get('dashboardPositionConfigButton').setText('위치 저장')
-    else:
-        app = config.get('dashboard')
-        app.setWindowFlags(Qt.WindowStaysOnTopHint | Qt.FramelessWindowHint | Qt.WA_ShowWithoutActivating)
-        app.setAttribute(Qt.WA_TranslucentBackground)
-        app.show()
-        config.saveConfig()
-        config.get('dashboardPositionConfigButton').setText('위치 설정')
