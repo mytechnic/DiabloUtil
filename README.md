@@ -1,13 +1,12 @@
 cd C:\App\Project\DiabloUtil
 rd /s /q build
 rd /s /q dist
-pyinstaller --hidden-import=sip --icon=star.ico -w DiabloCloneStarHunter.py
-copy DiabloCloneStarHunterConfig-Source.yaml dist\DiabloCloneStarHunter\DiabloCloneStarHunterConfig.yaml
-copy README.txt dist\DiabloCloneStarHunter\
-copy star.png dist\DiabloCloneStarHunter\
-copy star.ico dist\DiabloCloneStarHunter\
-cd dist
-rd /s /q DiabloCloneStarHunter-v1.15
-ren DiabloCloneStarHunter DiabloCloneStarHunter-v1.15
+pyinstaller --onefile --noconsole DiabloCloneStarHunter.py
+mkdir dist\DiabloCloneStarHunter-v1.15
+move dist\DiabloCloneStarHunter.exe dist\DiabloCloneStarHunter-v1.15\
+copy DiabloCloneStarHunterConfig-Source.yaml dist\DiabloCloneStarHunter-v1.15\DiabloCloneStarHunterConfig.yaml
+copy star.png dist\DiabloCloneStarHunter-v1.15\
+copy README.txt dist\DiabloCloneStarHunter-v1.15\
+cd dist\
 zip -9vr DiabloCloneStarHunter-v1.15.zip ./DiabloCloneStarHunter-v1.15
 cd ..

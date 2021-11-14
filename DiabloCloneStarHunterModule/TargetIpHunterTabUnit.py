@@ -160,7 +160,7 @@ def autoFindIpTimerValue(widget, config):
 
 
 def autoFindIpTimerUnit(widget, config):
-    form = QLabel('초 (자동검색 모드에서 동작)', widget)
+    form = QLabel('초', widget)
     form.setMinimumHeight(25)
     form.setTextInteractionFlags(Qt.TextSelectableByMouse)
     config.set('autoFindTimerUnit', form)

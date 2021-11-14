@@ -1,6 +1,5 @@
 /build/
 /dist/
 /.idea/
-/*.spec
 /*.xml
 /__pycache__

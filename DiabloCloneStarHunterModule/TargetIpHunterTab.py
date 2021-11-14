@@ -131,6 +131,8 @@ def stayModeClickedEvent():
 
 def gameIpSearchButtonClickedEvent():
     targetIpHunterConfigSave()
+
+    startGameIpTimer()
     gameIpSearchAction(True)
 
 
@@ -141,7 +143,7 @@ def gameIpResetClickedEvent():
     config.get('findAllIpResultValue').setText('N/A')
     config.get('gameIpHistory').setText('')
     config.get('autoFindIpTimer').stop()
-    config.set('autoFindTimerStart', time.time())
+    config.set('autoFindTimerStartTime', time.time())
     config.get('autoFindTimerValue').setText('0')
     if config.get('dashboard').isVisible():
         config.get('dashboardTimer').setText('0 초')
@@ -157,7 +159,7 @@ def dashboardOpenButtonClickedEvent():
 def autoFindIpTimerTimeoutEvent():
     config = __CONFIG__
 
-    timer = str(math.floor(time.time() - config.get('autoFindTimerStart')))
+    timer = str(math.floor(time.time() - config.get('autoFindTimerStartTime')))
     config.get('autoFindTimerValue').setText(timer)
     if config.get('dashboard').isVisible():
         config.get('dashboardTimer').setText(timer + ' 초')
@@ -353,9 +355,9 @@ def addGameIpHistory(gameIpList):
 def startGameIpTimer():
     config = __CONFIG__
 
-    if not config.get('autoFindTimerStart') and not config.get('autoFindIpTimer').isActive():
+    if not config.get('autoFindIpTimer').isActive():
         config.get('autoFindIpTimer').start()
-    config.set('autoFindTimerStart', time.time())
+    config.set('autoFindTimerStartTime', time.time())
 
 
 def startGameIpFinder(isStart=True):
