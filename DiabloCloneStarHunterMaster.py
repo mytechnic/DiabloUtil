@@ -11,6 +11,15 @@ from DiabloCloneStarHunterMasterModule import D2MasterMainWindow
 from DiabloCloneStarHunterModule.D2Config import D2Config
 
 
+def global_exception_hook(exctype, value, traceback):
+    print(exctype, value, traceback)
+    sys._excepthook(exctype, value, traceback)
+
+
+sys._excepthook = sys.excepthook
+sys.excepthook = global_exception_hook
+
+
 class MainApp(QWidget):
     config: D2Config = None
 
@@ -19,7 +28,7 @@ class MainApp(QWidget):
 
         self.config = D2Config(__PROGRAM_ID__)
         self.config.set('programId', __PROGRAM_ID__)
-        self.config.set('killSignal', False)
+        self.config.set('KILL_SIGNAL', False)
 
         D2MasterMainWindow.paintMainWindow(self, self.config, app)
         self.showMainForm()
@@ -31,7 +40,7 @@ class MainApp(QWidget):
         self.show()
 
     def closeEvent(self, event):
-        self.config.set('killSignal', True)
+        self.config.set('KILL_SIGNAL', True)
         self.exit()
         event.accept()
 
@@ -45,8 +54,5 @@ if __name__ == '__main__':
         sys.exit(0)
 
     app = QApplication(sys.argv)
-    try:
-        mainApp = MainApp(app)
-        sys.exit(app.exec_())
-    except Exception as e:
-        print(e)
+    mainApp = MainApp(app)
+    sys.exit(app.exec_())

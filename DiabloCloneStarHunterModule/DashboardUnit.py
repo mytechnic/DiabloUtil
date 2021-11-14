@@ -22,3 +22,12 @@ def dashboardTimer(widget, config, font, color: QColor):
     form.setAlignment(QtCore.Qt.AlignRight)
     form.setTextInteractionFlags(Qt.TextSelectableByMouse)
     config.set('dashboardTimer', form)
+
+
+def dashboardTimer2(widget, config, font, color: QColor):
+    form = QLabel('', widget)
+    form.setFont(font)
+    form.setStyleSheet('color: ' + color.name())
+    form.setAlignment(QtCore.Qt.AlignRight)
+    form.setTextInteractionFlags(Qt.TextSelectableByMouse)
+    config.set('dashboardTimer2', form)

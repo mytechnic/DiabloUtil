@@ -1,47 +1,48 @@
 import sys
+from PyQt5.QtWidgets import QWidget,QPushButton,QApplication,QListWidget,QGridLayout,QLabel
+from PyQt5.QtCore import QTimer,QDateTime
 
-from PyQt5.QtCore import Qt, QPoint
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QDesktopWidget
+class WinForm(QWidget):
+    def __init__(self,parent=None):
+        super(WinForm, self).__init__(parent)
+        self.setWindowTitle('QTimer example')
 
+        self.listFile=QListWidget()
+        self.label=QLabel('Label')
+        self.startBtn=QPushButton('Start')
+        self.endBtn=QPushButton('Stop')
 
-class cssden(QMainWindow):
-    def __init__(self):
-        super().__init__()
+        layout=QGridLayout()
 
-        # <MainWindow Properties>
-        self.setFixedSize(320, 450)
-        self.setStyleSheet("QMainWindow{background-color: darkgray;border: 1px solid black}")
-        self.setWindowFlags(Qt.FramelessWindowHint)
-        self.center()
-        # </MainWindow Properties>
+        self.timer=QTimer()
+        self.timer.timeout.connect(self.showTime)
 
-        # <Label Properties>
-        self.lbl = QLabel(self)
-        self.lbl.setText("test")
-        self.lbl.setStyleSheet(
-            "QLabel{background-color: rgb(0,0,0); border: 1px solid red; color: rgb(255,255,255); font: bold italic 20pt 'Times New Roman';}")
-        self.lbl.setGeometry(5, 5, 60, 40)
-        # </Label Properties>
+        layout.addWidget(self.label,0,0,1,2)
+        layout.addWidget(self.startBtn,1,0)
+        layout.addWidget(self.endBtn,1,1)
 
-        self.oldPos = self.pos()
-        self.show()
+        self.startBtn.clicked.connect(self.startTimer)
+        self.endBtn.clicked.connect(self.endTimer)
 
-    def center(self):
-        qr = self.frameGeometry()
-        cp = QDesktopWidget().availableGeometry().center()
-        qr.moveCenter(cp)
-        self.move(qr.topLeft())
+        self.setLayout(layout)
 
-    def mousePressEvent(self, event):
-        self.oldPos = event.globalPos()
+    def showTime(self):
+        time=QDateTime.currentDateTime()
+        timeDisplay=time.toString('yyyy-MM-dd hh:mm:ss dddd')
+        self.label.setText(timeDisplay)
 
-    def mouseMoveEvent(self, event):
-        delta = QPoint(event.globalPos() - self.oldPos)
-        self.move(self.x() + delta.x(), self.y() + delta.y())
-        self.oldPos = event.globalPos()
+    def startTimer(self):
+        self.timer.start(1000)
+        self.startBtn.setEnabled(False)
+        self.endBtn.setEnabled(True)
 
+    def endTimer(self):
+        self.timer.stop()
+        self.startBtn.setEnabled(True)
+        self.endBtn.setEnabled(False)
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = cssden()
+    app=QApplication(sys.argv)
+    form=WinForm()
+    form.show()
     sys.exit(app.exec_())

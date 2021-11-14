@@ -66,6 +66,7 @@ def fontConfigButtonClickedEvent():
         config.get('dashboardConfigValue').setFont(font)
         config.get('dashboardGameIp').setFont(font)
         config.get('dashboardTimer').setFont(font)
+        config.get('dashboardTimer2').setFont(font)
 
 
 def getDashboardFontColor(config):
@@ -85,3 +86,4 @@ def fontColorFormClickedEvent():
         config.get('dashboardConfigValue').setStyleSheet("color: %s" % color.name())
         config.get('dashboardGameIp').setStyleSheet("color: %s" % color.name())
         config.get('dashboardTimer').setStyleSheet("color: %s" % color.name())
+        config.get('dashboardTimer2').setStyleSheet("color: %s" % color.name())

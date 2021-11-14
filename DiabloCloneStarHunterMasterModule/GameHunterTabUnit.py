@@ -58,7 +58,7 @@ def gameCreateNumberTitle(widget, config):
 
 
 def gameCreateNumberForm(widget, config):
-    form = QLineEdit(config.getConfig('gameCreateNumber') or '1', widget)
+    form = QLineEdit(str(config.getConfig('gameCreateNumber')) or '1', widget)
     form.setMinimumHeight(25)
     form.setFixedWidth(50)
     form.setMaxLength(10)
@@ -79,7 +79,7 @@ def gameCreateCycleSecTitle(widget, config):
 
 
 def gameCreateCycleSecForm(widget, config):
-    form = QLineEdit(config.getConfig('gameCreateCycleSec') or '90', widget)
+    form = QLineEdit(str(config.getConfig('gameCreateCycleSec')) or '90', widget)
     form.setMinimumHeight(25)
     form.setFixedWidth(50)
     form.setMaxLength(10)
@@ -106,7 +106,7 @@ def gameJoinAfterSecTitle(widget, config):
 
 
 def gameJoinAfterSecForm(widget, config):
-    form = QLineEdit(config.getConfig('gameCreateCycleSec') or '30', widget)
+    form = QLineEdit(str(config.getConfig('gameJoinAfterSec')) or '30', widget)
     form.setMinimumHeight(25)
     form.setFixedWidth(50)
     form.setMaxLength(10)
@@ -193,3 +193,9 @@ def gameHunterConfigApplyButton(widget, config, clickedEvent):
     form.clicked.connect(clickedEvent)
     form.setMinimumHeight(40)
     config.set('gameHunterConfigApplyButton', form)
+
+
+def gameHunterHistory(widget, config):
+    form = QTextEdit('', widget)
+    form.setReadOnly(True)
+    config.set('gameHunterHistory', form)

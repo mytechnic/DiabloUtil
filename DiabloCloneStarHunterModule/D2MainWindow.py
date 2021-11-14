@@ -32,6 +32,8 @@ def loadWindowUnit(widget, config, app):
     TargetIpHunterTabUnit.manualFindIpMode(widget, config, TargetIpHunterTab.manualFindIpModeClickedEvent)
     TargetIpHunterTabUnit.autoFindIpMode(widget, config, TargetIpHunterTab.autoFindIpModeClickedEvent)
     TargetIpHunterTabUnit.stayGameIpMode(widget, config, TargetIpHunterTab.stayModeClickedEvent)
+    TargetIpHunterTabUnit.targetIpViewTitle(widget, config)
+    TargetIpHunterTabUnit.targetIpViewValue(widget, config)
     TargetIpHunterTabUnit.findIpRegionTitle(widget, config)
     TargetIpHunterTabUnit.findIpRegionResult(widget, config)
     TargetIpHunterTabUnit.findIpResultTitle(widget, config)
@@ -44,6 +46,7 @@ def loadWindowUnit(widget, config, app):
     TargetIpHunterTabUnit.autoFindIpTimerValue(widget, config)
     TargetIpHunterTabUnit.autoFindIpTimerUnit(widget, config)
     TargetIpHunterTabUnit.autoFindIpTimer(widget, config, TargetIpHunterTab.autoFindIpTimerTimeoutEvent)
+    TargetIpHunterTabUnit.autoFindIpFinder(widget, config, TargetIpHunterTab.autoFindIpFinderTimeoutEvent)
     TargetIpHunterTabUnit.gameIpSearchButton(widget, config, TargetIpHunterTab.gameIpSearchButtonClickedEvent)
     TargetIpHunterTabUnit.dashboardOpenButton(widget, config, TargetIpHunterTab.dashboardOpenButtonClickedEvent)
     TargetIpHunterTabUnit.gameIpResetButton(widget, config, TargetIpHunterTab.gameIpResetClickedEvent)
@@ -104,6 +107,7 @@ def getTabLayout(widget, config, app):
 def currentChangedEvent(i):
     config = __CONFIG__
 
+    config.setConfig('targetIp', config.get('targetIpForm').text().strip())
     if i == 0:
         if config.get('manualFindIpMode').isChecked():
             config.get('targetIpForm').setReadOnly(False)

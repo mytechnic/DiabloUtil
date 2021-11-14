@@ -2,12 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8337dbd9-f518-48b5-aa85-eef486c9ff08" name="Default Changelist" comment="배포버전 1.14">
+      <change afterPath="$PROJECT_DIR$/sample.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunter.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterMaster.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterMaster.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterMasterModule/D2MasterMainWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterMasterModule/D2MasterMainWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterMasterModule/GameHunterTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterMasterModule/GameHunterTab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterMasterModule/GameHunterTabUnit.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterMasterModule/GameHunterTabUnit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2GameFlow.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2GameFlow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2GameUnitAction.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2GameUnitAction.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2MainWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2MainWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2ServerIp.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2ServerIp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/Dashboard.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/Dashboard.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardConfigTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardConfigTab.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardConfigTabUnit.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardConfigTabUnit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardUnit.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/DashboardUnit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/FirewallTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/FirewallTab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/TargetIpHunterTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/TargetIpHunterTab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/TargetIpHunterTabUnit.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/TargetIpHunterTabUnit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StarDiablo2AdminUtils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/StarDiablo2IPUtils.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,21 +62,21 @@
     <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/DiabloCloneStarHunterModule" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\App\Project\DiabloUtil" />
       <recent name="C:\App\Project\DiabloUtil\DiabloCloneStarHunterModule" />
       <recent name="C:\App\Project\DiabloUtil\DiabloCloneStarHunterMasterModule" />
-      <recent name="C:\App\Project\DiabloUtil" />
       <recent name="C:\App\Project\DiabloUtil\저작권 관련정보" />
       <recent name="C:\App\Project\DiabloUtil\D2IpScan" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.DiabloCloneStarHunter">
-    <configuration name="DiabloCloneStarHunter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.DiabloCloneStarHunterMaster">
+    <configuration name="DiabloCloneStarHunter" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="DiabloUtil" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -103,70 +118,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="StarDiablo2AdminUtils (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="DiabloUtil" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/StarDiablo2AdminUtils.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="StarDiablo2AdminUtils" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="DiabloUtil" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\App\Project\DiabloUtil\StarDiablo2AdminUtils.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="StarDiablo2IPUtils" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="DiabloUtil" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\App\Project\DiabloUtil\StarDiablo2IPUtils.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="sample" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="sample" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DiabloUtil" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -187,13 +139,15 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.DiabloCloneStarHunter" />
+      <item itemvalue="Python.DiabloCloneStarHunterMaster" />
+      <item itemvalue="Python.sample" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.DiabloCloneStarHunter" />
         <item itemvalue="Python.DiabloCloneStarHunterMaster" />
-        <item itemvalue="Python.StarDiablo2AdminUtils" />
-        <item itemvalue="Python.StarDiablo2AdminUtils (1)" />
-        <item itemvalue="Python.StarDiablo2IPUtils" />
+        <item itemvalue="Python.sample" />
       </list>
     </recent_temporary>
   </component>
@@ -360,7 +314,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636804021240</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="배포버전 1.14">
+      <created>1636807484524</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1636807484524</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

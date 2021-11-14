@@ -61,80 +61,65 @@ def programSearchButtonClickedEvent():
 
     fileOpen = QFileDialog.getOpenFileName(widget, 'Open file', config.getConfig('programPath'), 'Files (D2R.exe)')
     if fileOpen != ('', ''):
-        try:
-            program = fileOpen[0].replace('/', '\\')
-            config.get('programPathForm').setText(program)
-            config.get('programPathForm').setCursorPosition(0)
-        except Exception as e:
-            print(e)
+        program = fileOpen[0].replace('/', '\\')
+        config.get('programPathForm').setText(program)
+        config.get('programPathForm').setCursorPosition(0)
 
 
 def createFirewallButtonClickedEvent():
     widget = __WIDGET__
     config = __CONFIG__
 
-    try:
-        firewallConfigSave()
+    firewallConfigSave()
 
-        targetIp = config.getConfig('targetIp')
-        programPath = config.getConfig('programPath')
-        firewallPolicy = config.getConfig('firewallPolicy')
+    targetIp = config.getConfig('targetIp')
+    programPath = config.getConfig('programPath')
+    firewallPolicy = config.getConfig('firewallPolicy')
 
-        if not targetIp:
-            QMessageBox.about(widget, '오류!!', '목표 IP를 입력 해 주세요.')
-            return
+    if not targetIp:
+        QMessageBox.about(widget, '오류!!', '목표 IP를 입력 해 주세요.')
+        return
 
-        if len(targetIp.split(',')) > 1:
-            QMessageBox.about(widget, '오류!!', '방화벽 설정을 위한 목표 IP는 1개만 지원 합니다.')
-            return
+    if len(targetIp.split(',')) > 1:
+        QMessageBox.about(widget, '오류!!', '방화벽 설정을 위한 목표 IP는 1개만 지원 합니다.')
+        return
 
-        if not programPath:
-            QMessageBox.about(widget, '오류!!', 'D2R 경로를 찾아 주세요.')
-            return
+    if not programPath:
+        QMessageBox.about(widget, '오류!!', 'D2R 경로를 찾아 주세요.')
+        return
 
-        if not os.path.isfile(programPath):
-            QMessageBox.about(widget, '오류!!', 'D2R 경로가 잘못 설정되었습니다.')
-            return
+    if not os.path.isfile(programPath):
+        QMessageBox.about(widget, '오류!!', 'D2R 경로가 잘못 설정되었습니다.')
+        return
 
-        firewallIpList = D2Firewall.getFirewallIpList(targetIp, firewallPolicy)
-        D2Firewall.clearFirewall()
-        ret = D2Firewall.setFirewall(targetIp, programPath, firewallIpList)
-        if ret:
-            QMessageBox.about(widget, '성공!!', '방화벽이 설정 되었습니다.')
-        else:
-            QMessageBox.about(widget, '오류!!', '방화벽 설정에 실패 하였습니다.(관리자 실행 권한 필요)')
+    firewallIpList = D2Firewall.getFirewallIpList(targetIp, firewallPolicy)
+    D2Firewall.clearFirewall()
+    ret = D2Firewall.setFirewall(targetIp, programPath, firewallIpList)
+    if ret:
+        QMessageBox.about(widget, '성공!!', '방화벽이 설정 되었습니다.')
+    else:
+        QMessageBox.about(widget, '오류!!', '방화벽 설정에 실패 하였습니다.(관리자 실행 권한 필요)')
 
-        config.get('firewallPolicySetResult').setText('\n'.join(firewallIpList))
-    except Exception as e:
-        print(e)
+    config.get('firewallPolicySetResult').setText('\n'.join(firewallIpList))
 
 
 def deleteFirewallButtonClickedEvent():
     widget = __WIDGET__
 
-    try:
-        ret = D2Firewall.clearFirewall()
-        if ret:
-            QMessageBox.about(widget, '성공!!', '방화벽이 삭제 되었습니다.')
-        else:
-            QMessageBox.about(widget, '오류!!', '방화벽 삭제에 실패 하였습니다.(관리자 실행 권한 필요)')
-    except Exception as e:
-        print(e)
+    ret = D2Firewall.clearFirewall()
+    if ret:
+        QMessageBox.about(widget, '성공!!', '방화벽이 삭제 되었습니다.')
+    else:
+        QMessageBox.about(widget, '오류!!', '방화벽 삭제에 실패 하였습니다.(관리자 실행 권한 필요)')
 
 
 def openFirewallButtonClickedEvent():
-    try:
-        th = threading.Thread(target=openFirewall, args=())
-        th.start()
-    except Exception as e:
-        print(e)
+    th = threading.Thread(target=openFirewall, args=())
+    th.start()
 
 
 def openFirewall():
-    try:
-        os.system('WF.msc')
-    except Exception as e:
-        print(e)
+    os.system('WF.msc')
 
 
 def firewallConfigSave():

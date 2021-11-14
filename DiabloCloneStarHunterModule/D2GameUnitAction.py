@@ -1,20 +1,22 @@
 import random
+import time
 
 import pyautogui
 import pygetwindow
+from PyQt5 import QtTest
 
-from DiabloCloneStarHunterModule import D2Timer
+from DiabloCloneStarHunterModule import D2GameFlow
 
 
 def moveRelAndClick(x1, y1, x2, y2):
     moveRelOnly(x1, y1, x2, y2)
-    D2Timer.sleep(random.randrange(100, 400))
+    sleep(random.randrange(100, 400))
     pyautogui.click()
 
 
 def moveToAndClick(x1, y1, x2, y2):
     moveToOnly(x1, y1, x2, y2)
-    D2Timer.sleep(random.randrange(100, 400))
+    sleep(random.randrange(100, 400))
     pyautogui.click()
 
 
@@ -30,11 +32,17 @@ def moveToOnly(x1, y1, x2, y2):
     pyautogui.moveTo(x, y, random.randrange(15, 40) / 100)
 
 
-def gameWindowFocusAction():
-    window = pygetwindow.getWindowsWithTitle('Diablo II: Resurrected')[0]
+def gameStartAction():
+    windows = pygetwindow.getWindowsWithTitle('Diablo II: Resurrected')
+    if windows is None or len(windows) == 0:
+        return False
+
+    window = windows[0]
     window.activate()
     window.top = 0
     window.left = 0
+
+    return True
 
 
 def gameTabMenuAction(position):
@@ -68,7 +76,17 @@ def gameCreateButtonAction(position):
 
 
 def gameExitAction(position):
+    D2GameFlow.gameFocus()
     pyautogui.hotkey('esc')
-    D2Timer.sleep(random.randrange(1000, 1500))
+
+    sleep(random.randrange(1000, 1500))
     (x1, y1, x2, y2) = position['exitButton']
     moveToAndClick(x1, y1, x2, y2)
+
+
+def sleep(millisecond):
+    QtTest.QTest.qWait(millisecond)
+
+
+def now():
+    return time.strftime('%H시 %M분 %S초', time.localtime(time.time()))

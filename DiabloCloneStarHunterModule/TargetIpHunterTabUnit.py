@@ -42,6 +42,25 @@ def stayGameIpMode(widget, config, clickedEvent):
     config.set('stayGameIpMode', form)
 
 
+def targetIpViewTitle(widget, config):
+    font = QtGui.QFont()
+    font.setBold(True)
+
+    form = QLabel('목표 IP', widget)
+    form.setFont(font)
+    form.setMinimumHeight(25)
+    form.setFixedWidth(80)
+    form.setTextInteractionFlags(Qt.TextSelectableByMouse)
+    config.set('targetIpViewTitle', form)
+
+
+def targetIpViewValue(widget, config):
+    form = QLabel('N/A', widget)
+    form.setMinimumHeight(25)
+    form.setTextInteractionFlags(Qt.TextSelectableByMouse)
+    config.set('targetIpViewValue', form)
+
+
 def findIpRegionTitle(widget, config):
     font = QtGui.QFont()
     font.setBold(True)
@@ -103,7 +122,7 @@ def findAllIpResultTitle(widget, config):
     font = QtGui.QFont()
     font.setBold(True)
 
-    form = QLabel('연결된 IP', widget)
+    form = QLabel('TCP/IP 정보', widget)
     form.setFont(font)
     form.setMinimumHeight(25)
     form.setFixedWidth(80)
@@ -151,8 +170,14 @@ def autoFindIpTimer(widget, config, timeoutAction):
     form = QTimer(widget)
     form.setInterval(200)
     form.timeout.connect(timeoutAction)
-    form.isActive()
     config.set('autoFindIpTimer', form)
+
+
+def autoFindIpFinder(widget, config, timeoutAction):
+    form = QTimer(widget)
+    form.setInterval(1000)
+    form.timeout.connect(timeoutAction)
+    config.set('autoFindIpFinder', form)
 
 
 def gameIpSearchButton(widget, config, clickedEvent):

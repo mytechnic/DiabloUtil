@@ -9,10 +9,19 @@ def getServerIpList():
     cache = {}
     for conn in connections:
         if conn.pid in cache:
-            name = cache[conn.pid]
+            (name, key) = cache[conn.pid]
         else:
-            name = psutil.Process(conn.pid).name()
-            cache[conn.pid] = name
+            try:
+                proc = psutil.Process(conn.pid)
+                if len(proc.cmdline()) == 0:
+                    continue
+
+                name = proc.name()
+                key = proc.cmdline()[0]
+                cache[conn.pid] = (name, key)
+            except Exception as e:
+                print(e)
+                break
 
         if name != 'D2R.exe':
             continue
@@ -104,9 +113,12 @@ def isFindGameIp(targetIp, gameIpList):
     return False
 
 
-def getGameFindResult(targetIp, gameIpList, isStayMode=False):
+def getGameFindResult(targetIp, serverIpList, gameIpList, isStayMode=False):
+    if len(serverIpList) == 0:
+        return '디아블로 서버를 찾을 수 없습니다.'
+
     if len(gameIpList) == 0:
-        return 'IP를 찾을 수 없습니다.'
+        return '게임방 IP를 찾을 수 없습니다.'
 
     ips = ', '.join(gameIpList)
 

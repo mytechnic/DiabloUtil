@@ -48,11 +48,13 @@ class DashboardApp(QWidget):
 
         DashboardUnit.dashboardGameIp(self, config, font, color)
         DashboardUnit.dashboardTimer(self, config, font, color)
+        DashboardUnit.dashboardTimer2(self, config, font, color)
 
         sub = QHBoxLayout()
         sub.setContentsMargins(0, 0, 0, 0)
         sub.addWidget(config.get('dashboardGameIp'))
         sub.addWidget(config.get('dashboardTimer'))
+        sub.addWidget(config.get('dashboardTimer2'))
 
         self.setLayout(sub)
 
