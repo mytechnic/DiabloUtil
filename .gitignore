@@ -1,8 +1,6 @@
 /build/
 /dist/
-/*.txt
+/.idea/
 /*.spec
 /*.xml
-/*.yaml
-/.idea
 /__pycache__
