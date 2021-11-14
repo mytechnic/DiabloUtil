@@ -2,7 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8337dbd9-f518-48b5-aa85-eef486c9ff08" name="Default Changelist" comment="배포버전 1.15">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DiabloUtil.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DiabloUtil.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunter.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterMasterModule/GameHunterTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterMasterModule/GameHunterTab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2GameUnitAction.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2GameUnitAction.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2Timer.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/D2Timer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloCloneStarHunterModule/TargetIpHunterTab.py" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloCloneStarHunterModule/TargetIpHunterTab.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +53,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -55,7 +64,7 @@
       <recent name="C:\App\Project\DiabloUtil\D2IpScan" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.DiabloCloneStarHunterMaster">
+  <component name="RunManager" selected="Python.DiabloCloneStarHunter">
     <configuration name="DiabloCloneStarHunter" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="DiabloUtil" />
       <option name="INTERPRETER_OPTIONS" value="" />

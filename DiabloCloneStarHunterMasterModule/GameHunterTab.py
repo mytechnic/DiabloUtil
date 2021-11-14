@@ -6,7 +6,7 @@ import pyautogui
 from PyQt5 import QtCore, QtTest
 from PyQt5.QtWidgets import *
 
-from DiabloCloneStarHunterModule import D2GameUnitAction, D2GamePosition, D2ServerIp, D2GameFlow
+from DiabloCloneStarHunterModule import D2GameUnitAction, D2GamePosition, D2ServerIp, D2GameFlow, D2Timer
 from DiabloCloneStarHunterModule.D2Config import D2Config
 
 __WIDGET__: QWidget = None
@@ -395,4 +395,4 @@ def debugPrint(message):
 
 
 def now():
-    return time.strftime('%H시 %M분 %S초', time.localtime(time.time()))
+    return D2Timer.now()

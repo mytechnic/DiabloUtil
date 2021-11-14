@@ -7,7 +7,7 @@ import pygame
 from PyQt5 import QtCore, QtGui, QtTest
 from PyQt5.QtWidgets import *
 
-from DiabloCloneStarHunterModule import D2ServerIp
+from DiabloCloneStarHunterModule import D2ServerIp, D2Timer
 from DiabloCloneStarHunterModule.D2Config import D2Config
 
 __WIDGET__: QWidget = None
@@ -339,7 +339,7 @@ def stayIpOutReactionSound():
 
 
 def now():
-    return time.strftime('%H시 %M분 %S초', time.localtime(time.time()))
+    return D2Timer.now()
 
 
 def addGameIpHistory(gameIpList):

@@ -5,7 +5,7 @@ import pyautogui
 import pygetwindow
 from PyQt5 import QtTest
 
-from DiabloCloneStarHunterModule import D2GameFlow
+from DiabloCloneStarHunterModule import D2GameFlow, D2Timer
 
 
 def moveRelAndClick(x1, y1, x2, y2):
@@ -89,4 +89,4 @@ def sleep(millisecond):
 
 
 def now():
-    return time.strftime('%H시 %M분 %S초', time.localtime(time.time()))
+    return D2Timer.now()

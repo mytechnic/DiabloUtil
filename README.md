@@ -7,7 +7,7 @@ copy README.txt dist\DiabloCloneStarHunter\
 copy star.png dist\DiabloCloneStarHunter\
 copy star.ico dist\DiabloCloneStarHunter\
 cd dist
-rd /s /q DiabloCloneStarHunter-v1.14
-ren DiabloCloneStarHunter DiabloCloneStarHunter-v1.14
-zip -9vr DiabloCloneStarHunter-v1.14.zip ./DiabloCloneStarHunter-v1.14
+rd /s /q DiabloCloneStarHunter-v1.15
+ren DiabloCloneStarHunter DiabloCloneStarHunter-v1.15
+zip -9vr DiabloCloneStarHunter-v1.15.zip ./DiabloCloneStarHunter-v1.15
 cd ..
