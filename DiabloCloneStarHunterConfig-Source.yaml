@@ -1,0 +1,12 @@
+dashboardFontColor: '#ff0000'
+dashboardFontFamily: Arial
+dashboardFontItalic: false
+dashboardFontPointSize: 20
+dashboardFontStrikeOut: false
+dashboardFontUnderline: false
+dashboardFontWeight: 75
+dashboardPosX: 780
+dashboardPosY: 40
+firewallPolicy: B
+programPath: C:\Program Files (x86)\Diablo II Resurrected\D2R.exe
+targetIp: 34.93.77.77
