@@ -42,15 +42,17 @@ def firewallPolicyTitle(widget, config):
     config.set('firewallPolicyTitle', form)
 
 
-def firewallPolicyAClass(widget, config):
+def firewallPolicyAClass(widget, config, clickedEvent):
     form = QRadioButton('A 클래스(예 - 34.x.x.x)', widget)
+    form.clicked.connect(clickedEvent)
     form.setChecked(config.getConfig('firewallPolicy') == 'A')
     form.setMinimumHeight(25)
     config.set('firewallPolicyAClass', form)
 
 
-def firewallPolicyBClass(widget, config):
+def firewallPolicyBClass(widget, config, clickedEvent):
     form = QRadioButton('B 클래스(예 - 34.93.x.x)', widget)
+    form.clicked.connect(clickedEvent)
     form.setChecked(config.getConfig('firewallPolicy') != 'A')
     form.setMinimumHeight(25)
     config.set('firewallPolicyBClass', form)

@@ -26,6 +26,6 @@ dashboardSuccessFontWeight: 75
 dashboardSuccessText: "{{GAME_IP}} - \u2605\u2605\u2605\u2606 OK \u2606\u2605\u2605\
   \u2605"
 dashboardTimer: HIDE
-firewallPolicy: B
+firewallPolicy: A
 programPath: C:\Program Files (x86)\Diablo II Resurrected\D2R.exe
 targetIp: ''

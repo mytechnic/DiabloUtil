@@ -49,6 +49,8 @@ def firewallTabWidget(widget, config):
     group = QButtonGroup(widget)
     group.addButton(config.get('firewallPolicyAClass'))
     group.addButton(config.get('firewallPolicyBClass'))
+    config.get('firewallPolicyAClass').setChecked(config.getConfig('firewallPolicy') == 'A')
+    config.get('firewallPolicyBClass').setChecked(config.getConfig('firewallPolicy') != 'A')
 
     widget = QWidget()
     widget.setLayout(layout)
@@ -64,6 +66,20 @@ def programSearchButtonClickedEvent():
         program = fileOpen[0].replace('/', '\\')
         config.get('programPathForm').setText(program)
         config.get('programPathForm').setCursorPosition(0)
+        config.setConfig('programPath', program)
+        config.saveConfig()
+
+
+def firewallPolicyAClassClickedEvent():
+    config = __CONFIG__
+    config.setConfig('firewallPolicy', 'A')
+    config.saveConfig()
+
+
+def firewallPolicyBClassClickedEvent():
+    config = __CONFIG__
+    config.setConfig('firewallPolicy', 'B')
+    config.saveConfig()
 
 
 def createFirewallButtonClickedEvent():
