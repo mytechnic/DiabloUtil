@@ -113,23 +113,23 @@ def isFindGameIp(targetIp, gameIpList):
     return False
 
 
-def getGameFindResult(targetIp, serverIpList, gameIpList, isStayMode=False):
+def getGameFindResult(config, targetIp, serverIpList, gameIpList):
+    isStayMode = config.get('stayGameIpMode').isChecked()
     if len(serverIpList) == 0:
-        return '디아블로 서버를 찾을 수 없습니다.'
+        return False, 'normal', '디아블로 서버를 찾을 수 없습니다.'
 
     if len(gameIpList) == 0:
-        return '게임방 IP를 찾을 수 없습니다.'
+        return False, 'normal', '게임방 IP를 찾을 수 없습니다.'
 
     ips = ', '.join(gameIpList)
-
     if isStayMode:
-        return ips + '(지킴이 모드)'
+        return True, 'normal', ips + '(지킴이 모드)'
 
     if not targetIp:
-        return ips
+        return True, 'normal', ips
 
     isFind = isFindGameIp(targetIp, gameIpList)
     if isFind:
-        return ips + ' - ★☆★☆ OK ☆★☆★'
+        return True, 'ok', ips
     else:
-        return ips + ' - FAIL!'
+        return True, 'fail', ips

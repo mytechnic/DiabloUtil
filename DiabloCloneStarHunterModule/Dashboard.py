@@ -43,17 +43,17 @@ class DashboardApp(QWidget):
         x, y = self.getAppPosition(app, config)
         self.move(x, y)
 
-        font = DashboardConfigTab.getDashboardFont(config)
-        color = DashboardConfigTab.getDashboardFontColor(config)
+        font = DashboardConfigTab.getDashboardFont(config, 'normal')
+        color = DashboardConfigTab.getDashboardFontColor(config, 'normal')
 
         DashboardUnit.dashboardGameIp(self, config, font, color)
-        DashboardUnit.dashboardTimer(self, config, font, color)
+        DashboardUnit.dashboardTimer1(self, config, font, color)
         DashboardUnit.dashboardTimer2(self, config, font, color)
 
         sub = QHBoxLayout()
         sub.setContentsMargins(0, 0, 0, 0)
         sub.addWidget(config.get('dashboardGameIp'))
-        sub.addWidget(config.get('dashboardTimer'))
+        sub.addWidget(config.get('dashboardTimer1'))
         sub.addWidget(config.get('dashboardTimer2'))
 
         self.setLayout(sub)

@@ -1,12 +1,31 @@
-dashboardFontColor: '#ff0000'
+dashboardFailFontColor: '#55557f'
+dashboardFailFontFamily: Arial
+dashboardFailFontItalic: false
+dashboardFailFontPointSize: 16
+dashboardFailFontStrikeOut: false
+dashboardFailFontUnderline: false
+dashboardFailFontWeight: 75
+dashboardFailText: '{{GAME_IP}} - FAIL'
+dashboardFontColor: '#ffffff'
 dashboardFontFamily: Arial
 dashboardFontItalic: false
-dashboardFontPointSize: 20
+dashboardFontPointSize: 22
 dashboardFontStrikeOut: false
 dashboardFontUnderline: false
 dashboardFontWeight: 75
-dashboardPosX: 780
-dashboardPosY: 40
+dashboardNormalText: '{{GAME_IP}}'
+dashboardPosX: 500
+dashboardPosY: 50
+dashboardSuccessFontColor: '#ff0000'
+dashboardSuccessFontFamily: Arial
+dashboardSuccessFontItalic: false
+dashboardSuccessFontPointSize: 20
+dashboardSuccessFontStrikeOut: false
+dashboardSuccessFontUnderline: false
+dashboardSuccessFontWeight: 75
+dashboardSuccessText: "{{GAME_IP}} - \u2605\u2605\u2605\u2606 OK \u2606\u2605\u2605\
+  \u2605"
+dashboardTimer: HIDE
 firewallPolicy: B
 programPath: C:\Program Files (x86)\Diablo II Resurrected\D2R.exe
-targetIp: 34.93.77.77
+targetIp: ''

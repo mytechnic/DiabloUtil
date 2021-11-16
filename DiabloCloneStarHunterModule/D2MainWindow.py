@@ -65,9 +65,26 @@ def loadWindowUnit(widget, config, app):
     FirewallTabUnit.deleteFirewallButton(widget, config, FirewallTab.deleteFirewallButtonClickedEvent)
     FirewallTabUnit.openFirewallButton(widget, config, FirewallTab.openFirewallButtonClickedEvent)
 
-    DashboardConfigTabUnit.dashboardConfigValue(widget, config)
-    DashboardConfigTabUnit.dashboardFontConfigButton(widget, config, DashboardConfigTab.fontConfigButtonClickedEvent)
-    DashboardConfigTabUnit.dashboardFontColorForm(widget, config, DashboardConfigTab.fontColorFormClickedEvent)
+    DashboardConfigTabUnit.dashboardPositionConfigTitle(widget, config)
+    DashboardConfigTabUnit.dashboardPositionConfigXTitle(widget, config)
+    DashboardConfigTabUnit.dashboardPositionX(widget, config, DashboardConfigTab.dashboardConfigRealtimeEvent)
+    DashboardConfigTabUnit.dashboardPositionConfigYTitle(widget, config)
+    DashboardConfigTabUnit.dashboardPositionY(widget, config, DashboardConfigTab.dashboardConfigRealtimeEvent)
+
+    DashboardConfigTabUnit.dashboardTargetIpNormalText(widget, config, DashboardConfigTab.dashboardConfigRealtimeEvent)
+    DashboardConfigTabUnit.dashboardTargetIpOkText(widget, config, DashboardConfigTab.dashboardConfigRealtimeEvent)
+    DashboardConfigTabUnit.dashboardTargetIpFailText(widget, config, DashboardConfigTab.dashboardConfigRealtimeEvent)
+
+    DashboardConfigTabUnit.dashboardTimerConfigTitle(widget, config)
+    DashboardConfigTabUnit.dashboardTimerShow(widget, config, DashboardConfigTab.dashboardTimerShowClickedEvent)
+    DashboardConfigTabUnit.dashboardTimerHide(widget, config, DashboardConfigTab.dashboardTimerHideClickedEvent)
+
+    DashboardConfigTabUnit.dashboardNormalFontButton(widget, config, DashboardConfigTab.normalFontButtonClickedEvent)
+    DashboardConfigTabUnit.dashboardNormalColorButton(widget, config, DashboardConfigTab.normalColorButtonClickedEvent)
+    DashboardConfigTabUnit.dashboardOkFontButton(widget, config, DashboardConfigTab.okFontButtonClickedEvent)
+    DashboardConfigTabUnit.dashboardOkColorButton(widget, config, DashboardConfigTab.okColorButtonClickedEvent)
+    DashboardConfigTabUnit.dashboardFailFontButton(widget, config, DashboardConfigTab.failFontButtonClickedEvent)
+    DashboardConfigTabUnit.dashboardFailColorButton(widget, config, DashboardConfigTab.failColorButtonClickedEvent)
 
 
 def getHeaderLayout(config):

@@ -7,7 +7,7 @@ import pygame
 from PyQt5 import QtCore, QtGui, QtTest
 from PyQt5.QtWidgets import *
 
-from DiabloCloneStarHunterModule import D2ServerIp, D2Timer
+from DiabloCloneStarHunterModule import D2ServerIp, D2Timer, DashboardConfigTab
 from DiabloCloneStarHunterModule.D2Config import D2Config
 
 __WIDGET__: QWidget = None
@@ -146,7 +146,7 @@ def gameIpResetClickedEvent():
     config.set('autoFindTimerStartTime', time.time())
     config.get('autoFindTimerValue').setText('0')
     if config.get('dashboard').isVisible():
-        config.get('dashboardTimer').setText('0 초')
+        config.get('dashboardTimer1').setText('0 초')
         config.get('dashboardTimer2').setText('')
 
 
@@ -162,7 +162,7 @@ def autoFindIpTimerTimeoutEvent():
     timer = str(math.floor(time.time() - config.get('autoFindTimerStartTime')))
     config.get('autoFindTimerValue').setText(timer)
     if config.get('dashboard').isVisible():
-        config.get('dashboardTimer').setText(timer + ' 초')
+        config.get('dashboardTimer1').setText(timer + ' 초')
 
 
 def autoFindIpFinderTimeoutEvent():
@@ -248,17 +248,22 @@ def gameIpSearchAction(isFirstFindReaction=False):
     serverIpList = D2ServerIp.getServerIpList()
     gameIpList = D2ServerIp.getGameIpList(serverIpList)
     gameRegion = D2ServerIp.getGameRegion(serverIpList)
-    gameFindResult = D2ServerIp.getGameFindResult(targetIp, serverIpList, gameIpList,
-                                                  config.get('stayGameIpMode').isChecked())
+    ret, mode, result = D2ServerIp.getGameFindResult(config, targetIp, serverIpList, gameIpList)
+
+    setDashboardFontStyle(config, mode)
+    if ret:
+        showMessage = getDashboardMessage(config, mode, result)
+    else:
+        showMessage = result
 
     if targetIp:
         config.get('targetIpViewValue').setText(targetIp)
     else:
         config.get('targetIpViewValue').setText('N/A')
     config.get('findIpRegionResult').setText(gameRegion)
-    config.get('findIpResultValue').setText(gameFindResult)
+    config.get('findIpResultValue').setText(showMessage)
     if config.get('dashboard').isVisible():
-        config.get('dashboardGameIp').setText(gameFindResult)
+        config.get('dashboardGameIp').setText(showMessage)
     if len(serverIpList) > 0:
         config.get('findAllIpResultValue').setText(', '.join(serverIpList))
     else:
@@ -274,6 +279,47 @@ def gameIpSearchAction(isFirstFindReaction=False):
             findGameIpReactionSound()
 
     return gameIpList
+
+
+def setDashboardFontStyle(config, mode):
+    colorMap = {
+        'normal': {
+            'font': DashboardConfigTab.getDashboardFont(config, 'normal'),
+            'color': DashboardConfigTab.getDashboardFontColor(config, 'normal')
+        },
+        'ok': {
+            'font': DashboardConfigTab.getDashboardFont(config, 'ok'),
+            'color': DashboardConfigTab.getDashboardFontColor(config, 'ok')
+        },
+        'fail': {
+            'font': DashboardConfigTab.getDashboardFont(config, 'fail'),
+            'color': DashboardConfigTab.getDashboardFontColor(config, 'fail')
+        }
+    }
+
+    font = colorMap[mode]['font']
+    color = colorMap[mode]['color']
+
+    config.get('dashboardGameIp').setFont(font)
+    config.get('dashboardTimer1').setFont(font)
+    config.get('dashboardTimer2').setFont(font)
+    config.get('dashboardGameIp').setStyleSheet("color: %s" % color.name())
+    config.get('dashboardTimer1').setStyleSheet("color: %s" % color.name())
+    config.get('dashboardTimer2').setStyleSheet("color: %s" % color.name())
+
+
+def getDashboardMessage(config, mode, ip):
+    if mode == 'ok':
+        message = config.getConfig('dashboardSuccessText')
+    elif mode == 'fail':
+        message = config.getConfig('dashboardFailText')
+    else:
+        message = config.getConfig('dashboardNormalText')
+
+    if not message:
+        message = ip
+
+    return message.replace('{{GAME_IP}}', ip)
 
 
 def findGameIpReactionSound():
