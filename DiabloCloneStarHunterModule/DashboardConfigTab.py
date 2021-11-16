@@ -3,8 +3,8 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor, QFont
 from PyQt5.QtWidgets import *
 
+from DiabloCloneStarHunterModule import TargetIpHunterTab
 from DiabloCloneStarHunterModule.D2Config import D2Config
-from DiabloCloneStarHunterModule.TargetIpHunterTab import targetIpHunterConfigSave
 
 __WIDGET__: QWidget = None
 __CONFIG__: D2Config = None
@@ -140,7 +140,7 @@ def normalFontButtonClickedEvent():
         config.setConfig('dashboardFontItalic', font.italic())
         config.setConfig('dashboardFontStrikeOut', font.strikeOut())
         config.setConfig('dashboardFontUnderline', font.underline())
-        targetIpHunterConfigSave()
+        TargetIpHunterTab.targetIpHunterConfigSave()
 
         config.get('dashboardGameIp').setFont(font)
         config.get('dashboardTimer1').setFont(font)
@@ -153,7 +153,7 @@ def normalColorButtonClickedEvent():
     color = QColorDialog.getColor(getDashboardFontColor(config, 'normal'))
     if color.isValid():
         config.setConfig('dashboardFontColor', color.name())
-        targetIpHunterConfigSave()
+        TargetIpHunterTab.targetIpHunterConfigSave()
 
         config.get('dashboardGameIp').setStyleSheet("color: %s" % color.name())
         config.get('dashboardTimer1').setStyleSheet("color: %s" % color.name())
@@ -171,7 +171,7 @@ def okFontButtonClickedEvent():
         config.setConfig('dashboardSuccessFontItalic', font.italic())
         config.setConfig('dashboardSuccessFontStrikeOut', font.strikeOut())
         config.setConfig('dashboardSuccessFontUnderline', font.underline())
-        targetIpHunterConfigSave()
+        TargetIpHunterTab.targetIpHunterConfigSave()
 
         config.get('dashboardGameIp').setFont(font)
         config.get('dashboardTimer1').setFont(font)
@@ -184,7 +184,7 @@ def okColorButtonClickedEvent():
     color = QColorDialog.getColor(getDashboardFontColor(config, 'ok'))
     if color.isValid():
         config.setConfig('dashboardSuccessFontColor', color.name())
-        targetIpHunterConfigSave()
+        TargetIpHunterTab.targetIpHunterConfigSave()
 
         config.get('dashboardGameIp').setStyleSheet("color: %s" % color.name())
         config.get('dashboardTimer1').setStyleSheet("color: %s" % color.name())
@@ -202,7 +202,7 @@ def failFontButtonClickedEvent():
         config.setConfig('dashboardFailFontItalic', font.italic())
         config.setConfig('dashboardFailFontStrikeOut', font.strikeOut())
         config.setConfig('dashboardFailFontUnderline', font.underline())
-        targetIpHunterConfigSave()
+        TargetIpHunterTab.targetIpHunterConfigSave()
 
         config.get('dashboardGameIp').setFont(font)
         config.get('dashboardTimer1').setFont(font)
@@ -215,7 +215,7 @@ def failColorButtonClickedEvent():
     color = QColorDialog.getColor(getDashboardFontColor(config, 'fail'))
     if color.isValid():
         config.setConfig('dashboardFailFontColor', color.name())
-        targetIpHunterConfigSave()
+        TargetIpHunterTab.targetIpHunterConfigSave()
 
         config.get('dashboardGameIp').setStyleSheet("color: %s" % color.name())
         config.get('dashboardTimer1').setStyleSheet("color: %s" % color.name())

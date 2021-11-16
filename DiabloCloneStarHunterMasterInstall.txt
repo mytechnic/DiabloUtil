@@ -1,0 +1,8 @@
+cd C:\App\Project\DiabloUtil
+rd /s /q build
+pyinstaller --noconfirm --onedir --windowed --icon "C:/App/Project/DiabloUtil/star.ico" --win-private-assemblies --win-no-prefer-redirects --add-data "C:/App/Project/DiabloUtil/README.txt;." --add-data "C:/App/Project/DiabloUtil/star.png;."  "C:/App/Project/DiabloUtil/DiabloCloneStarHunterMaster.py"
+copy DiabloCloneStarHunterConfig-Source.yaml dist\DiabloCloneStarHunterMaster\DiabloCloneStarHunterConfig.yaml
+cd dist\
+ren DiabloCloneStarHunterMaster DiabloCloneStarHunterMaster-v1.01
+zip -9vr DiabloCloneStarHunterMaster-v1.01.zip ./DiabloCloneStarHunterMaster-v1.01
+cd ..

@@ -27,5 +27,10 @@ dashboardSuccessText: "{{GAME_IP}} - \u2605\u2605\u2605\u2606 OK \u2606\u2605\u2
   \u2605"
 dashboardTimer: HIDE
 firewallPolicy: A
+gameCreateCycleSec: ''
+gameCreateNumber: ''
+gameJoinAfterSec: ''
+gameNamePrefix: ''
+gamePassword: ''
 programPath: C:\Program Files (x86)\Diablo II Resurrected\D2R.exe
 targetIp: ''
