@@ -4,6 +4,6 @@ rd /s /q dist
 pyinstaller --noconfirm --onedir --windowed --icon "C:/App/Project/DiabloUtil/star.ico" --win-private-assemblies --win-no-prefer-redirects --add-data "C:/App/Project/DiabloUtil/README.txt;." --add-data "C:/App/Project/DiabloUtil/star.png;."  "C:/App/Project/DiabloUtil/DiabloCloneStarHunter.py"
 copy DiabloCloneStarHunterConfig-Source.yaml dist\DiabloCloneStarHunter\DiabloCloneStarHunterConfig.yaml
 cd dist\
-ren DiabloCloneStarHunter DiabloCloneStarHunter-v1.16
-zip -9vr DiabloCloneStarHunter-v1.16.zip ./DiabloCloneStarHunter-v1.16
+ren DiabloCloneStarHunter DiabloCloneStarHunter-v1.17
+zip -9vr DiabloCloneStarHunter-v1.17.zip ./DiabloCloneStarHunter-v1.17
 cd ..

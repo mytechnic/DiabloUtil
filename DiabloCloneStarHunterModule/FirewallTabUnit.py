@@ -62,7 +62,7 @@ def firewallPolicyRuleIpTitle(widget, config):
     font = QtGui.QFont()
     font.setBold(True)
 
-    form = QLabel('아웃바운드 규칙', widget)
+    form = QLabel('방화벽 규칙', widget)
     form.setFont(font)
     form.setMinimumHeight(25)
     form.setFixedWidth(100)
@@ -73,6 +73,7 @@ def firewallPolicyRuleIpTitle(widget, config):
 def firewallPolicyRuleIp(widget, config):
     form = QTextEdit('', widget)
     form.setReadOnly(False)
+    form.setPlainText(config.getConfig('firewallRuleIp'))
     form.setMaximumHeight(150)
     config.set('firewallPolicyRuleIp', form)
 

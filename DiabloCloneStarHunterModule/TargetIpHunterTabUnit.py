@@ -194,7 +194,7 @@ def autoFindIpCounterTimer(widget, config, timeoutAction):
 
 def autoFindIpSearchTimer(widget, config, timeoutAction):
     form = QTimer(widget)
-    form.setInterval(1000)
+    form.setSingleShot(True)
     form.timeout.connect(timeoutAction)
     config.set('autoFindIpSearchTimer', form)
 

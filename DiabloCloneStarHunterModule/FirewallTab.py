@@ -97,6 +97,10 @@ def createTargetIpFirewallButtonClickedEvent():
         QMessageBox.about(widget, '오류!!', '목표 IP를 입력 해 주세요.')
         return
 
+    if not isValidFirewallRuleIp():
+        QMessageBox.about(widget, '오류!!', '목표 IP의 입력 형식이 잘 못 되었습니다.')
+        return
+
     if len(targetIp.split(',')) > 1:
         QMessageBox.about(widget, '오류!!', '방화벽 설정을 위한 목표 IP는 1개만 지원 합니다.')
         return
@@ -120,17 +124,29 @@ def createTargetIpFirewallButtonClickedEvent():
     config.get('firewallPolicyRuleIp').setText('\n'.join(firewallIpList))
 
 
+def isValidFirewallRuleIp(firewallRuleIp):
+    firewallIpList = D2Firewall.getRuleIpToFirewallIpList(firewallRuleIp)
+    for ip in firewallRuleIp:
+        z = ip.strip().split('-')
+        if len(z) != 2:
+            return False
+
+        ip1 = z[0].strip()
+        ip2 = z[1].strip()
+        print(ip)
+
+
 def createInputTextFirewallButtonClickedEvent():
     widget = __WIDGET__
     config = __CONFIG__
 
     firewallConfigSave()
 
-    rules = config.get('firewallPolicyRuleIp').toPlainText().strip()
+    firewallRuleIp = config.get('firewallPolicyRuleIp').toPlainText().strip()
     targetIp = config.getConfig('targetIp')
     programPath = config.getConfig('programPath')
 
-    if not rules:
+    if not firewallRuleIp:
         QMessageBox.about(widget, '오류!!', '규칙을 입력 해 주세요.')
         return
 
@@ -142,13 +158,13 @@ def createInputTextFirewallButtonClickedEvent():
         QMessageBox.about(widget, '오류!!', 'D2R 경로가 잘못 설정되었습니다.')
         return
 
-    firewallIpList = D2Firewall.getRuleIpToFirewallIpList(rules)
+    firewallIpList = D2Firewall.getRuleIpToFirewallIpList(firewallRuleIp)
     D2Firewall.clearFirewall()
     ret = D2Firewall.setFirewall(targetIp, programPath, firewallIpList)
     if ret:
         QMessageBox.about(widget, '성공!!', '방화벽이 설정 되었습니다.')
     else:
-        QMessageBox.about(widget, '오류!!', '방화벽 설정에 실패 하였습니다.(관리자 실행 권한 필요)')
+        QMessageBox.about(widget, '오류!!', '방화벽 설정에 실패 하였습니다.(방화벽 규칙이 잘못 입력 되었거나 관리자 실행 권한 필요합니다)')
 
     config.get('firewallPolicyRuleIp').setText('\n'.join(firewallIpList))
 
@@ -156,6 +172,7 @@ def createInputTextFirewallButtonClickedEvent():
 def deleteFirewallButtonClickedEvent():
     widget = __WIDGET__
 
+    firewallConfigSave()
     ret = D2Firewall.clearFirewall()
     if ret:
         QMessageBox.about(widget, '성공!!', '방화벽이 삭제 되었습니다.')
@@ -181,4 +198,5 @@ def firewallConfigSave():
         config.setConfig('firewallPolicy', 'A')
     else:
         config.setConfig('firewallPolicy', 'B')
+    config.setConfig('firewallRuleIp', config.get('firewallPolicyRuleIp').toPlainText().strip())
     config.saveConfig()

@@ -175,17 +175,20 @@ def autoFindIpCounterTimerTimeoutEvent():
 def autoFindIpSearchTimerTimeoutEvent():
     config = __CONFIG__
 
-    if config.get('gameIpExist') is None:
-        config.set('gameIpExist', True)
-        config.set('gameIpLogWrite', True)
+    while config.get('findIpMode') == 'AUTO':
+        if config.get('gameIpExist') is None:
+            config.set('gameIpExist', True)
+            config.set('gameIpLogWrite', True)
 
-    gameIpList = gameIpSearchAction(config.get('gameIpLogWrite'))
-    if len(gameIpList) > 0:
-        config.set('gameIpExist', True)
-        config.set('gameIpLogWrite', False)
-    else:
-        config.set('gameIpExist', False)
-        config.set('gameIpLogWrite', True)
+        gameIpList = gameIpSearchAction(config.get('gameIpLogWrite'))
+        if len(gameIpList) > 0:
+            config.set('gameIpExist', True)
+            config.set('gameIpLogWrite', False)
+        else:
+            config.set('gameIpExist', False)
+            config.set('gameIpLogWrite', True)
+
+        sleep(1200)
 
 
 def targetIpHunterConfigSave():
