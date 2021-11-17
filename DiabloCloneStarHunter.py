@@ -1,3 +1,4 @@
+import ctypes
 import os
 import sys
 
@@ -51,12 +52,18 @@ class MainApp(QWidget):
         self.setFixedSize(500, 600)
         self.show()
 
+        if not ctypes.windll.shell32.IsUserAnAdmin():
+            QMessageBox.about(self, '실행 오류', '관리자 권한으로 다시 실행 해 주세요.')
+            self.exit()
+            sys.exit(0)
+
     def closeEvent(self, event):
         self.config.set('KILL_SIGNAL', True)
         self.exit()
         event.accept()
 
     def exit(self):
+        self.config.set('KILL_SIGNAL', True)
         if self.config.get('dashboard'):
             self.config.get('dashboard').close()
 
@@ -75,9 +82,9 @@ if __name__ == '__main__':
                 appPath = path
                 break
 
-    if appTitle is None:
+    if appTitle is not None:
+        app = QApplication(sys.argv)
+        mainApp = MainApp(app, appTitle, appPath)
+        sys.exit(app.exec_())
+    else:
         sys.exit(0)
-
-    app = QApplication(sys.argv)
-    mainApp = MainApp(app, appTitle, appPath)
-    sys.exit(app.exec_())

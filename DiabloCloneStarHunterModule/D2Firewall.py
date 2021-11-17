@@ -43,8 +43,9 @@ def getRuleIpToFirewallIpList(rules):
     if not rules:
         return []
 
-    firewallIpList = rules.split("\n")
-    for rule in firewallIpList:
+    z = rules.split("\n")
+    firewallIpList = []
+    for rule in z:
         rule = rule.strip()
         rule = rule.replace(' ', '')
         if not rule:
