@@ -33,4 +33,4 @@ gameJoinAfterSec: ''
 gameNamePrefix: ''
 gamePassword: ''
 programPath: C:\Program Files (x86)\Diablo II Resurrected\D2R.exe
-targetIp: ''
+targetIp: 37.244.11.101

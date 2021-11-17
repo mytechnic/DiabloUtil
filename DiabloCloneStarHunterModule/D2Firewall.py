@@ -17,7 +17,7 @@ def getFirewallName(targetIp, firewallClass='B'):
         return '스타 우버디아 (' + str(o1) + '.x.x.x)'
 
 
-def getFirewallIpList(targetIp, firewallClass='B'):
+def getTargetIpToFirewallIpList(targetIp, firewallClass='B'):
     if not targetIp:
         return []
 
@@ -36,6 +36,22 @@ def getFirewallIpList(targetIp, firewallClass='B'):
             firewallIpList.append('34.117.122.7-' + '34.255.255.255')
         else:
             firewallIpList.append(str(g1) + '.1.1.1-' + str(g1) + '.255.255.255')
+    return firewallIpList
+
+
+def getRuleIpToFirewallIpList(rules):
+    if not rules:
+        return []
+
+    firewallIpList = rules.split("\n")
+    for rule in firewallIpList:
+        rule = rule.strip()
+        rule = rule.replace(' ', '')
+        if not rule:
+            continue
+
+        firewallIpList.append(rule)
+
     return firewallIpList
 
 

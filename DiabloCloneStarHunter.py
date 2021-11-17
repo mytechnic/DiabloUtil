@@ -5,7 +5,7 @@ import pygetwindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import *
 
-from DiabloCloneStarHunterModule import D2MainWindow
+from DiabloCloneStarHunterModule import D2MainWindow, D2Process
 from DiabloCloneStarHunterModule.D2Config import D2Config
 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
@@ -24,21 +24,29 @@ sys._excepthook = sys.excepthook
 sys.excepthook = global_exception_hook
 
 
+def getAppTitle(gamePath=None):
+    if gamePath is None:
+        return __TITLE__
+
+    return __TITLE__ + ' ' + gamePath
+
+
 class MainApp(QWidget):
     config: D2Config = None
 
-    def __init__(self, app):
+    def __init__(self, app, title, gamePath):
         super().__init__()
 
         self.config = D2Config(__PROGRAM_ID__)
         self.config.set('programId', __PROGRAM_ID__)
+        self.config.set('programPath', gamePath)
         self.config.set('KILL_SIGNAL', False)
 
         D2MainWindow.paintMainWindow(self, self.config, app)
-        self.showMainForm()
+        self.showMainForm(title)
 
-    def showMainForm(self):
-        self.setWindowTitle(__TITLE__)
+    def showMainForm(self, title):
+        self.setWindowTitle(title)
         self.setWindowIcon(QIcon('star.png'))
         self.setFixedSize(500, 600)
         self.show()
@@ -54,9 +62,22 @@ class MainApp(QWidget):
 
 
 if __name__ == '__main__':
-    if len(pygetwindow.getWindowsWithTitle(__TITLE__)) > 0:
+    pathList = D2Process.getAppPathList()
+
+    appTitle = None
+    appPath = None
+    if len(pathList) == 0:
+        appTitle = getAppTitle()
+    else:
+        for path in pathList:
+            if len(pygetwindow.getWindowsWithTitle(getAppTitle(path))) == 0:
+                appTitle = getAppTitle(path)
+                appPath = path
+                break
+
+    if appTitle is None:
         sys.exit(0)
 
     app = QApplication(sys.argv)
-    mainApp = MainApp(app)
+    mainApp = MainApp(app, appTitle, appPath)
     sys.exit(app.exec_())

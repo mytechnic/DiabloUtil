@@ -35,13 +35,14 @@ def firewallTabWidget(widget, config):
 
     sub = QHBoxLayout()
     sub.setAlignment(QtCore.Qt.AlignLeft)
-    sub.addWidget(config.get('firewallPolicySetResultTitle'))
-    sub.addWidget(config.get('firewallPolicySetResult'))
+    sub.addWidget(config.get('firewallPolicyRuleIpTitle'), alignment=QtCore.Qt.AlignTop)
+    sub.addWidget(config.get('firewallPolicyRuleIp'))
     layout.addLayout(sub)
 
     sub = QHBoxLayout()
-    sub.setAlignment(QtCore.Qt.AlignCenter)
-    sub.addWidget(config.get('createFirewallButton'))
+    sub.setAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignTop)
+    sub.addWidget(config.get('createTargetIpFirewallButton'))
+    sub.addWidget(config.get('createInputTextFirewallButton'))
     sub.addWidget(config.get('deleteFirewallButton'))
     sub.addWidget(config.get('openFirewallButton'))
     layout.addLayout(sub)
@@ -82,7 +83,7 @@ def firewallPolicyBClassClickedEvent():
     config.saveConfig()
 
 
-def createFirewallButtonClickedEvent():
+def createTargetIpFirewallButtonClickedEvent():
     widget = __WIDGET__
     config = __CONFIG__
 
@@ -108,7 +109,7 @@ def createFirewallButtonClickedEvent():
         QMessageBox.about(widget, '오류!!', 'D2R 경로가 잘못 설정되었습니다.')
         return
 
-    firewallIpList = D2Firewall.getFirewallIpList(targetIp, firewallPolicy)
+    firewallIpList = D2Firewall.getTargetIpToFirewallIpList(targetIp, firewallPolicy)
     D2Firewall.clearFirewall()
     ret = D2Firewall.setFirewall(targetIp, programPath, firewallIpList)
     if ret:
@@ -116,7 +117,40 @@ def createFirewallButtonClickedEvent():
     else:
         QMessageBox.about(widget, '오류!!', '방화벽 설정에 실패 하였습니다.(관리자 실행 권한 필요)')
 
-    config.get('firewallPolicySetResult').setText('\n'.join(firewallIpList))
+    config.get('firewallPolicyRuleIp').setText('\n'.join(firewallIpList))
+
+
+def createInputTextFirewallButtonClickedEvent():
+    widget = __WIDGET__
+    config = __CONFIG__
+
+    firewallConfigSave()
+
+    rules = config.get('firewallPolicyRuleIp').toPlainText().strip()
+    targetIp = config.getConfig('targetIp')
+    programPath = config.getConfig('programPath')
+
+    if not rules:
+        QMessageBox.about(widget, '오류!!', '규칙을 입력 해 주세요.')
+        return
+
+    if not programPath:
+        QMessageBox.about(widget, '오류!!', 'D2R 경로를 찾아 주세요.')
+        return
+
+    if not os.path.isfile(programPath):
+        QMessageBox.about(widget, '오류!!', 'D2R 경로가 잘못 설정되었습니다.')
+        return
+
+    firewallIpList = D2Firewall.getRuleIpToFirewallIpList(rules)
+    D2Firewall.clearFirewall()
+    ret = D2Firewall.setFirewall(targetIp, programPath, firewallIpList)
+    if ret:
+        QMessageBox.about(widget, '성공!!', '방화벽이 설정 되었습니다.')
+    else:
+        QMessageBox.about(widget, '오류!!', '방화벽 설정에 실패 하였습니다.(관리자 실행 권한 필요)')
+
+    config.get('firewallPolicyRuleIp').setText('\n'.join(firewallIpList))
 
 
 def deleteFirewallButtonClickedEvent():

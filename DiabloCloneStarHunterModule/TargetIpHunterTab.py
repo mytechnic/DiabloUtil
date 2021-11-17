@@ -7,7 +7,7 @@ import pygame
 from PyQt5 import QtCore, QtGui, QtTest
 from PyQt5.QtWidgets import *
 
-from DiabloCloneStarHunterModule import D2ServerIp, D2Timer, DashboardConfigTab
+from DiabloCloneStarHunterModule import D2Process, D2Timer, DashboardConfigTab
 from DiabloCloneStarHunterModule.D2Config import D2Config
 
 __WIDGET__: QWidget = None
@@ -23,6 +23,12 @@ def targetIpHunterTabWidget(widget, config, app):
 
     layout = QVBoxLayout()
     layout.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
+
+    sub = QHBoxLayout()
+    sub.setAlignment(QtCore.Qt.AlignLeft)
+    sub.addWidget(config.get('appExecuteModeTitle'))
+    sub.addWidget(config.get('appExecuteModeValue'))
+    layout.addLayout(sub)
 
     sub = QHBoxLayout()
     sub.setAlignment(QtCore.Qt.AlignLeft)
@@ -64,9 +70,9 @@ def targetIpHunterTabWidget(widget, config, app):
 
     sub = QHBoxLayout()
     sub.setAlignment(QtCore.Qt.AlignLeft)
-    sub.addWidget(config.get('autoFindTimerTitle'))
-    sub.addWidget(config.get('autoFindTimerValue'))
-    sub.addWidget(config.get('autoFindTimerUnit'))
+    sub.addWidget(config.get('autoFindIpCounterTimerTitle'))
+    sub.addWidget(config.get('autoFindIpCounterTimerValue'))
+    sub.addWidget(config.get('autoFindIpCounterTimerUnit'))
     layout.addLayout(sub)
 
     sub = QHBoxLayout()
@@ -86,6 +92,8 @@ def targetIpHunterTabWidget(widget, config, app):
 
     config.get('manualFindIpMode').setChecked(True)
     findIpSearchModeManualMode()
+
+    config.set('gameIpLogWrite', True)
 
     widget = QWidget()
     widget.setLayout(layout)
@@ -108,7 +116,6 @@ def autoFindIpModeClickedEvent():
         return
 
     findIpSearchModeAutoMode()
-    # findIpSearchModeAutoStart()
 
 
 def stayModeClickedEvent():
@@ -118,7 +125,7 @@ def stayModeClickedEvent():
     if config.get('findIpMode') == 'STAY':
         return
 
-    gameIpList = gameIpSearchAction()
+    gameIpList = gameIpSearchAction(False)
     if len(gameIpList) == 0:
         QMessageBox.about(widget, '오류 메시지', '게임방 IP를 찾을 수 없습니다. 지킴이 모드는 게임방 안에서만 가능합니다.')
         config.get('manualFindIpMode').setChecked(True)
@@ -132,7 +139,7 @@ def stayModeClickedEvent():
 def gameIpSearchButtonClickedEvent():
     targetIpHunterConfigSave()
 
-    startGameIpTimer()
+    startAutoFindTimerStartTime()
     gameIpSearchAction(True)
 
 
@@ -142,9 +149,9 @@ def gameIpResetClickedEvent():
     config.get('findIpResultValue').setText('N/A')
     config.get('findAllIpResultValue').setText('N/A')
     config.get('gameIpHistory').setText('')
-    config.get('autoFindIpTimer').stop()
-    config.set('autoFindTimerStartTime', time.time())
-    config.get('autoFindTimerValue').setText('0')
+    config.get('autoFindIpCounterTimer').stop()
+    config.set('currentFindIpStartTime', time.time())
+    config.get('autoFindIpCounterTimerValue').setText('0')
     if config.get('dashboard').isVisible():
         config.get('dashboardTimer1').setText('0 초')
         config.get('dashboardTimer2').setText('')
@@ -156,16 +163,16 @@ def dashboardOpenButtonClickedEvent():
     mainApp.open()
 
 
-def autoFindIpTimerTimeoutEvent():
+def autoFindIpCounterTimerTimeoutEvent():
     config = __CONFIG__
 
-    timer = str(math.floor(time.time() - config.get('autoFindTimerStartTime')))
-    config.get('autoFindTimerValue').setText(timer)
+    timer = str(math.floor(time.time() - config.get('currentFindIpStartTime')))
+    config.get('autoFindIpCounterTimerValue').setText(timer)
     if config.get('dashboard').isVisible():
         config.get('dashboardTimer1').setText(timer + ' 초')
 
 
-def autoFindIpFinderTimeoutEvent():
+def autoFindIpSearchTimerTimeoutEvent():
     config = __CONFIG__
 
     if config.get('gameIpExist') is None:
@@ -196,37 +203,21 @@ def findIpSearchModeManualMode():
     config.get('stayIpValue').setText('N/A')
     targetIpHunterConfigSave()
 
-    startGameIpFinder(False)
+    startAutoFindIpSearchTimer(False)
 
 
 def findIpSearchModeAutoMode():
     config = __CONFIG__
 
     config.set('findIpMode', 'AUTO')
+    config.set('gameIpLogWrite', True)
     config.get('targetIpForm').setReadOnly(True)
     config.get('gameIpSearchButton').setDisabled(True)
     config.get('stayIpValue').setText('N/A')
     targetIpHunterConfigSave()
 
-    startGameIpTimer()
-    startGameIpFinder(True)
-
-
-def findIpSearchModeAutoStart():
-    config = __CONFIG__
-
-    isFirst = True
-    while config.get('autoFindIpMode').isChecked():
-        if config.get('KILL_SIGNAL'):
-            break
-
-        gameIpList = gameIpSearchAction(isFirst)
-        if len(gameIpList) > 0 and isFirst:
-            isFirst = False
-        elif len(gameIpList) == 0:
-            isFirst = True
-
-        sleep(1000)
+    startAutoFindTimerStartTime()
+    startAutoFindIpSearchTimer(True)
 
 
 def findIpSearchModeStayMode():
@@ -238,17 +229,17 @@ def findIpSearchModeStayMode():
     config.get('stayIpValue').setText('N/A')
     targetIpHunterConfigSave()
 
-    startGameIpFinder(False)
+    startAutoFindIpSearchTimer(False)
 
 
-def gameIpSearchAction(isFirstFindReaction=False):
+def gameIpSearchAction(isForceFindAction=False):
     config = __CONFIG__
 
     targetIp = config.getConfig('targetIp')
-    serverIpList = D2ServerIp.getServerIpList()
-    gameIpList = D2ServerIp.getGameIpList(serverIpList)
-    gameRegion = D2ServerIp.getGameRegion(serverIpList)
-    ret, mode, result = D2ServerIp.getGameFindResult(config, targetIp, serverIpList, gameIpList)
+    serverIpList = D2Process.getServerIpList(config.get('programPath'))
+    gameIpList = D2Process.getGameIpList(serverIpList)
+    gameRegion = D2Process.getGameRegion(serverIpList)
+    ret, isFind, mode, result = D2Process.getGameFindResult(config, targetIp, serverIpList, gameIpList)
 
     setDashboardFontStyle(config, mode)
     if ret:
@@ -269,11 +260,14 @@ def gameIpSearchAction(isFirstFindReaction=False):
     else:
         config.get('findAllIpResultValue').setText('N/A')
 
-    isFind = D2ServerIp.isFindGameIp(targetIp, gameIpList)
-    if isFirstFindReaction:
+    if len(gameIpList) == 0:
+        config.set('gameIpLogWrite', True)
+
+    if isForceFindAction:
         if len(gameIpList) > 0:
-            startGameIpTimer()
+            startAutoFindTimerStartTime()
             addGameIpHistory(gameIpList)
+            config.set('gameIpLogWrite', False)
 
         if isFind:
             findGameIpReactionSound()
@@ -343,17 +337,12 @@ def findIpSearchModeStayStart(stayIp):
         if config.get('KILL_SIGNAL'):
             break
 
-        gameIpList = gameIpSearchAction()
-        if len(gameIpList) == 0:
-            stayIpOutReaction(stayIp)
-            break
-
-        isStay = D2ServerIp.isFindGameIp(stayIp, gameIpList)
+        gameIpList = gameIpSearchAction(False)
+        isStay, findIp = D2Process.isFindGameIp(stayIp, gameIpList)
         if not isStay:
             stayIpOutReaction(stayIp)
-            break
 
-        sleep(1000)
+        sleep(3000)
 
 
 def stayIpOutReaction(stayIp):
@@ -361,6 +350,11 @@ def stayIpOutReaction(stayIp):
 
     while config.get('stayGameIpMode').isChecked():
         if config.get('KILL_SIGNAL'):
+            break
+
+        gameIpList = gameIpSearchAction(False)
+        isStay, findIp = D2Process.isFindGameIp(stayIp, gameIpList)
+        if isStay:
             break
 
         msg = stayIp + '(지킴이 모드 실패)'
@@ -383,7 +377,7 @@ def stayIpOutReactionSound():
         for i in range(3):
             winsound.PlaySound("SystemHand", winsound.SND_ASYNC | winsound.SND_ALIAS)
             sleep(1000)
-        sleep(3000)
+        sleep(2500)
 
 
 def now():
@@ -398,21 +392,21 @@ def addGameIpHistory(gameIpList):
     config.get('gameIpHistory').moveCursor(QtGui.QTextCursor.End)
 
 
-def startGameIpTimer():
+def startAutoFindTimerStartTime():
     config = __CONFIG__
 
-    if not config.get('autoFindIpTimer').isActive():
-        config.get('autoFindIpTimer').start()
-    config.set('autoFindTimerStartTime', time.time())
+    if not config.get('autoFindIpCounterTimer').isActive():
+        config.get('autoFindIpCounterTimer').start()
+    config.set('currentFindIpStartTime', time.time())
 
 
-def startGameIpFinder(isStart=True):
+def startAutoFindIpSearchTimer(isStart=True):
     config = __CONFIG__
 
     if isStart:
-        config.get('autoFindIpFinder').start()
+        config.get('autoFindIpSearchTimer').start()
     elif not isStart:
-        config.get('autoFindIpFinder').stop()
+        config.get('autoFindIpSearchTimer').stop()
 
 
 def sleep(millisecond, func=None):

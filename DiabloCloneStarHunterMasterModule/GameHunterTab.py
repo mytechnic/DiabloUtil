@@ -6,7 +6,7 @@ import pyautogui
 from PyQt5 import QtCore, QtTest
 from PyQt5.QtWidgets import *
 
-from DiabloCloneStarHunterModule import D2GameUnitAction, D2GamePosition, D2ServerIp, D2GameFlow, D2Timer
+from DiabloCloneStarHunterModule import D2GameUnitAction, D2GamePosition, D2Process, D2GameFlow, D2Timer
 from DiabloCloneStarHunterModule.D2Config import D2Config
 
 __WIDGET__: QWidget = None
@@ -200,7 +200,7 @@ def runMacroAction(targetIp, gameNamePrefix, gamePassword, gameCreateNumber, gam
             break
 
         # 원하는 IP를 찾았을 경우 대기 모드로 전환
-        isFind = D2ServerIp.isFindGameIp(targetIp, gameIpList)
+        isFind, findIp = D2Process.isFindGameIp(targetIp, gameIpList)
         if isFind:
             setGameHunterSleepMode()
             break
@@ -234,13 +234,13 @@ def getGameCreateRequestAndGameIpList(position, gameNamePrefix, gamePassword, ga
     if not config.get('isGameHunterActiveMode'):
         return None
 
-    serverIpList = D2ServerIp.getServerIpList()
+    serverIpList = D2Process.getServerIpList(config.get('programPath'))
     if len(serverIpList) == 0:
         config.get('gameHunterStatus').setText('진행 불가')
         debugPrint('디아블로 서버를 찾을 수 없습니다.')
         return None
 
-    gameIpList = D2ServerIp.getGameIpList(serverIpList)
+    gameIpList = D2Process.getGameIpList(serverIpList)
     if len(gameIpList) > 0:
         config.get('gameHunterStatus').setText('진행 불가')
         debugPrint('게임방 안에 있어 실행 할 수 없습니다.')
@@ -280,13 +280,13 @@ def createGameAndIpList(position):
     while config.get('isGameHunterActiveMode'):
 
         D2GameUnitAction.gameCreateButtonAction(position)
-        serverIpList = D2ServerIp.getServerIpList()
+        serverIpList = D2Process.getServerIpList(config.get('programPath'))
         if len(serverIpList) == 0:
             config.get('gameHunterStatus').setText('진행 불가')
             debugPrint('디아블로 서버를 찾을 수 없습니다.')
             break
 
-        gameIpList = D2ServerIp.getGameIpList(serverIpList)
+        gameIpList = D2Process.getGameIpList(serverIpList)
         if len(gameIpList) > 0:
             return gameIpList
 
@@ -310,13 +310,13 @@ def gameExit(position):
     if not config.get('isGameHunterActiveMode'):
         return
 
-    serverIpList = D2ServerIp.getServerIpList()
+    serverIpList = D2Process.getServerIpList(config.get('programPath'))
     if len(serverIpList) == 0:
         config.get('gameHunterStatus').setText('진행 불가')
         debugPrint('디아블로 서버를 찾을 수 없습니다.')
         return
 
-    gameIpList = D2ServerIp.getGameIpList(serverIpList)
+    gameIpList = D2Process.getGameIpList(serverIpList)
     if len(gameIpList) == 0:
         config.get('gameHunterStatus').setText('진행 불가')
         debugPrint('게임방 IP를 찾을 수 없습니다.')

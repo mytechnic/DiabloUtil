@@ -10,7 +10,7 @@ def programPathTitle(widget, config):
     form = QLabel('D2R 경로', widget)
     form.setFont(font)
     form.setMinimumHeight(25)
-    form.setFixedWidth(80)
+    form.setFixedWidth(100)
     form.setTextInteractionFlags(Qt.TextSelectableByMouse)
     config.set('programPathTitle', form)
 
@@ -37,7 +37,7 @@ def firewallPolicyTitle(widget, config):
     form = QLabel('차단 정책', widget)
     form.setFont(font)
     form.setMinimumHeight(25)
-    form.setFixedWidth(80)
+    form.setFixedWidth(100)
     form.setTextInteractionFlags(Qt.TextSelectableByMouse)
     config.set('firewallPolicyTitle', form)
 
@@ -58,30 +58,37 @@ def firewallPolicyBClass(widget, config, clickedEvent):
     config.set('firewallPolicyBClass', form)
 
 
-def firewallPolicySetResultTitle(widget, config):
+def firewallPolicyRuleIpTitle(widget, config):
     font = QtGui.QFont()
     font.setBold(True)
 
-    form = QLabel('적용 결과', widget)
+    form = QLabel('아웃바운드 규칙', widget)
     form.setFont(font)
     form.setMinimumHeight(25)
-    form.setFixedWidth(80)
+    form.setFixedWidth(100)
     form.setTextInteractionFlags(Qt.TextSelectableByMouse)
-    config.set('firewallPolicySetResultTitle', form)
+    config.set('firewallPolicyRuleIpTitle', form)
 
 
-def firewallPolicySetResult(widget, config):
-    form = QLabel('N/A', widget)
-    form.setMinimumHeight(25)
-    form.setTextInteractionFlags(Qt.TextSelectableByMouse)
-    config.set('firewallPolicySetResult', form)
+def firewallPolicyRuleIp(widget, config):
+    form = QTextEdit('', widget)
+    form.setReadOnly(False)
+    form.setMaximumHeight(150)
+    config.set('firewallPolicyRuleIp', form)
 
 
-def createFirewallButton(widget, config, clickedEvent):
-    button = QPushButton('방화벽 적용', widget)
+def createTargetIpFirewallButton(widget, config, clickedEvent):
+    button = QPushButton('목표IP로 설정', widget)
     button.setMinimumHeight(40)
     button.clicked.connect(clickedEvent)
-    config.set('createFirewallButton', button)
+    config.set('createTargetIpFirewallButton', button)
+
+
+def createInputTextFirewallButton(widget, config, clickedEvent):
+    button = QPushButton('규칙으로 설정', widget)
+    button.setMinimumHeight(40)
+    button.clicked.connect(clickedEvent)
+    config.set('createInputTextFirewallButton', button)
 
 
 def deleteFirewallButton(widget, config, clickedEvent):

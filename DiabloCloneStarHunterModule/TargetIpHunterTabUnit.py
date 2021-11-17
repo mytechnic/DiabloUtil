@@ -6,6 +6,25 @@ from PyQt5.QtWidgets import *
 from DiabloCloneStarHunterModule.Dashboard import DashboardApp
 
 
+def appExecuteModeTitle(widget, config):
+    font = QtGui.QFont()
+    font.setBold(True)
+
+    form = QLabel('실행 구분', widget)
+    form.setFont(font)
+    form.setMinimumHeight(25)
+    form.setFixedWidth(80)
+    form.setTextInteractionFlags(Qt.TextSelectableByMouse)
+    config.set('appExecuteModeTitle', form)
+
+
+def appExecuteModeValue(widget, config):
+    form = QLabel(config.get('programPath') or '통합', widget)
+    form.setMinimumHeight(25)
+    form.setTextInteractionFlags(Qt.TextSelectableByMouse)
+    config.set('appExecuteModeValue', form)
+
+
 def findIpModeTitle(widget, config):
     font = QtGui.QFont()
     font.setBold(True)
@@ -137,7 +156,7 @@ def findAllIpResultValue(widget, config):
     config.set('findAllIpResultValue', form)
 
 
-def autoFindIpTimerTitle(widget, config):
+def autoFindIpCounterTimerTitle(widget, config):
     font = QtGui.QFont()
     font.setBold(True)
 
@@ -146,38 +165,38 @@ def autoFindIpTimerTitle(widget, config):
     form.setMinimumHeight(25)
     form.setFixedWidth(80)
     form.setTextInteractionFlags(Qt.TextSelectableByMouse)
-    config.set('autoFindTimerTitle', form)
+    config.set('autoFindIpCounterTimerTitle', form)
 
 
-def autoFindIpTimerValue(widget, config):
+def autoFindIpCounterTimerValue(widget, config):
     form = QLabel('0', widget)
     form.setMinimumHeight(25)
     form.setMinimumWidth(20)
     form.setMaximumWidth(60)
     form.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
     form.setTextInteractionFlags(Qt.TextSelectableByMouse)
-    config.set('autoFindTimerValue', form)
+    config.set('autoFindIpCounterTimerValue', form)
 
 
-def autoFindIpTimerUnit(widget, config):
+def autoFindIpCounterTimerUnit(widget, config):
     form = QLabel('초', widget)
     form.setMinimumHeight(25)
     form.setTextInteractionFlags(Qt.TextSelectableByMouse)
-    config.set('autoFindTimerUnit', form)
+    config.set('autoFindIpCounterTimerUnit', form)
 
 
-def autoFindIpTimer(widget, config, timeoutAction):
+def autoFindIpCounterTimer(widget, config, timeoutAction):
     form = QTimer(widget)
     form.setInterval(200)
     form.timeout.connect(timeoutAction)
-    config.set('autoFindIpTimer', form)
+    config.set('autoFindIpCounterTimer', form)
 
 
-def autoFindIpFinder(widget, config, timeoutAction):
+def autoFindIpSearchTimer(widget, config, timeoutAction):
     form = QTimer(widget)
     form.setInterval(1000)
     form.timeout.connect(timeoutAction)
-    config.set('autoFindIpFinder', form)
+    config.set('autoFindIpSearchTimer', form)
 
 
 def gameIpSearchButton(widget, config, clickedEvent):
