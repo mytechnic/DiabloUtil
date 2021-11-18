@@ -56,12 +56,12 @@ def getRuleIpToFirewallIpList(rules):
     return firewallIpList
 
 
-def setFirewall(targetIp, program, firewallIpList):
+def setFirewall(targetIp, programPath, firewallIpList):
     name = getFirewallName(targetIp)
     remoteip = ','.join(firewallIpList)
 
-    cmd = ['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=' + name, 'dir=out',
-           'program=' + program, 'remoteip=' + remoteip, 'action=block', 'enable=yes']
+    cmd = ['netsh', 'advfirewall', 'firewall', 'add', 'rule', 'name=' + name + '', 'dir=out',
+           'program=' + programPath + '', 'remoteip=' + remoteip, 'action=block', 'enable=yes']
     res = subprocess.run(cmd, stdout=subprocess.PIPE, text=True)
     if res.returncode == 0:
         return True
@@ -69,20 +69,48 @@ def setFirewall(targetIp, program, firewallIpList):
         return False
 
 
-def clearFirewall():
-    data = subprocess.run(['netsh', 'advfirewall', 'firewall', 'show', 'rule', 'name=all', 'dir=out'],
-                          stdout=subprocess.PIPE, text=True)
+def delFirewall(programPath):
+    cmd = ['netsh', 'advfirewall', 'firewall', 'show', 'rule', 'name=all', 'dir=out', 'verbose']
+    data = subprocess.run(cmd, stdout=subprocess.PIPE, text=True)
     arr = data.stdout.split("\n")
 
+    ruleList = []
     for text in arr:
-        if text.find('스타 우버디아 (') == -1:
+        if text.find('규칙 이름:') >= 0:
+            ruleList.append({})
+
+        if len(ruleList) == 0:
             continue
 
-        z = text.split('규칙 이름:')
-        name = z[1].strip()
-        res = subprocess.run(['netsh', 'advfirewall', 'firewall', 'delete', 'rule', 'name=', name],
-                             stdout=subprocess.PIPE, text=True)
-        if res.returncode != 0:
-            return False
+        z = text.strip().split(':', maxsplit=1)
+        if len(z) < 2:
+            continue
 
-    return True
+        key = z[0].strip()
+        val = z[1].strip()
+        idx = len(ruleList) - 1
+        ruleList[idx][key] = val
+
+    for rule in ruleList:
+        if '규칙 이름' in rule:
+            name = rule['규칙 이름']
+        else:
+            name = ''
+        if '프로그램' in rule:
+            program = rule['프로그램']
+        else:
+            program = ''
+
+        if name.find('스타 우버디아') == -1:
+            continue
+
+        if program != programPath:
+            continue
+
+        cmd = ['netsh', 'advfirewall', 'firewall', 'delete', 'rule', 'name=' + name + '', 'dir=out',
+               'program=' + programPath + '']
+        res = subprocess.run(cmd, stdout=subprocess.PIPE, text=True)
+        if res.returncode != 0:
+            return False, res.stderr
+
+    return True, 'OK'
