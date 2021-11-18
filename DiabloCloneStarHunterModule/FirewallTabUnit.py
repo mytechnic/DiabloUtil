@@ -16,7 +16,7 @@ def programPathTitle(widget, config):
 
 
 def programPathForm(widget, config):
-    form = QLineEdit(config.getConfig('programPath'), widget)
+    form = QLineEdit(config.get('programPath') or config.getConfig('programPath'), widget)
     form.setReadOnly(True)
     form.setMinimumHeight(25)
     form.setCursorPosition(0)
