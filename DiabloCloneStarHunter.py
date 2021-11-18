@@ -11,7 +11,7 @@ from DiabloCloneStarHunterModule.D2Config import D2Config
 
 os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = '1'
 
-__TITLE__ = 'Diablo Clone Star Hunter 1.17'
+__TITLE__ = 'Diablo Clone Star Hunter 1.17a'
 __PROGRAM_ID__ = 'DiabloCloneStarHunter'
 
 
